@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vinay Sai Jagannath J — Portfolio</title>
+  <meta name="description" content="Dark animated portfolio website" />
+  <style>
+    :root{
+      --bg:#070A12;
+      --panel:rgba(255,255,255,.06);
+      --text:#EAF0FF;
+      --muted:rgba(234,240,255,.72);
+      --muted2:rgba(234,240,255,.55);
+      --stroke:rgba(255,255,255,.10);
+      --shadow: 0 20px 80px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+
+      --a:#7C3AED; /* violet */
+      --b:#06B6D4; /* cyan */
+      --c:#22C55E; /* green */
+      --e:#E11D48; /* rose */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(124,58,237,.20), transparent 55%),
+        radial-gradient(900px 700px at 85% 15%, rgba(6,182,212,.18), transparent 55%),
+        radial-gradient(900px 700px at 50% 90%, rgba(34,197,94,.12), transparent 55%),
+        linear-gradient(180deg, #050713 0%, #070A12 35%, #050713 100%);
+      overflow-x:hidden;
+    }
+
+    /* subtle noise overlay */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="120" height="120" filter="url(%23n)" opacity=".20"/></svg>');
+      opacity:.07;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:28px 18px 80px}
+
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(7,10,18,.78), rgba(7,10,18,.55));
+      border-bottom:1px solid var(--stroke);
+    }
+    .topbar-inner{
+      max-width:1100px; margin:0 auto;
+      padding:14px 18px;
+      display:flex; align-items:center; gap:14px; justify-content:space-between;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px;}
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background-image:url('logo.png');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      position:relative; overflow:hidden;
+    }
+
+    .logo:after{
+      content:"";
+      position:absolute; inset:-60%;
+      background: conic-gradient(from 180deg, rgba(255,255,255,0), rgba(255,255,255,.26), rgba(255,255,255,0));
+      animation: spin 6s linear infinite;
+      opacity:.25;
+    }
+    .brand h1{margin:0;font-size:14px;letter-spacing:.2px;line-height:1.2}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    .nav{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    .pill{
+      font-size:12px;
+      padding:10px 12px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);
+      border-radius:999px;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .pill:hover{transform: translateY(-1px); background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.16)}
+    .pill.active{background:rgba(6,182,212,.14); border-color:rgba(6,182,212,.30)}
+
+    .hero{padding:28px 0 18px}
+    .grid{display:grid; grid-template-columns: 1.35fr .65fr; gap:18px; align-items:stretch;}
+    @media (max-width: 880px){ .grid{grid-template-columns:1fr} .brand{min-width:auto} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border:1px solid var(--stroke);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card-inner{padding:22px}
+    .hero-title{font-size:40px;line-height:1.05;margin:4px 0 10px;letter-spacing:-.8px;}
+    .gradient-text{
+      background: linear-gradient(90deg, rgba(124,58,237,1), rgba(6,182,212,1), rgba(34,197,94,1));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .subtitle{margin:0 0 18px;color:var(--muted);font-size:15px;line-height:1.6;max-width:70ch;}
+    .cta{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:12px;}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:11px 14px; border-radius: 14px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      font-size:13px; user-select:none;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.16)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.85));
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 18px 55px rgba(6,182,212,.18);
+    }
+
+    .meta-row{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;color:var(--muted2);font-size:12px;}
+    .chip{padding:8px 10px;border-radius:999px;border:1px solid var(--stroke);background: rgba(255,255,255,.03);}
+
+    /* NEW: hero highlights to reduce empty look */
+    .highlights{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 640px){ .highlights{grid-template-columns:1fr} }
+    .hitem{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding:12px;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+    }
+    .hitem:hover{transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.16)}
+    .hitem strong{display:block;font-size:12px;letter-spacing:.2px}
+    .hitem span{display:block;margin-top:6px;font-size:12px;color:var(--muted);line-height:1.55}
+
+    .pf-top{display:flex;align-items:center;gap:14px}
+    .avatar{
+      width:62px;height:62px;border-radius:20px;
+      border:1px solid rgba(255,255,255,.14);
+      background: url('pic.png') center/cover no-repeat;
+      position:relative;overflow:hidden;
+    }
+    .avatar:before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 35% 25%, rgba(255,255,255,.20), transparent 55%),
+                  linear-gradient(135deg, rgba(225,29,72,.12), rgba(124,58,237,.12));
+      mix-blend-mode: screen;
+      opacity:.9;
+    }
+    .avatar:after{
+      content:""; position:absolute; inset:-40%;
+      background: conic-gradient(from 90deg, rgba(255,255,255,0), rgba(255,255,255,.18), rgba(255,255,255,0));
+      animation: spin 7.5s linear infinite; opacity:.55;
+    }
+    .pf-name{margin:0;font-size:14px;line-height:1.2}
+    .pf-role{margin:3px 0 0;font-size:12px;color:var(--muted)}
+    .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+    .kpi{padding:12px;border-radius:16px;border:1px solid var(--stroke);background: rgba(255,255,255,.03);}
+    .kpi strong{display:block;font-size:14px}
+    .kpi span{display:block;font-size:12px;color:var(--muted2);margin-top:4px}
+
+    section{padding:18px 0}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 10px;}
+    h2{margin:0;font-size:18px;letter-spacing:-.2px;}
+    .hint{color:var(--muted2);font-size:12px}
+
+    .two-col{display:grid;grid-template-columns: 1fr 1fr;gap:14px;}
+    @media (max-width: 880px){ .two-col{grid-template-columns:1fr} }
+
+    .list{display:grid;gap:10px;}
+    .item{
+      padding:14px 14px;border-radius: var(--radius);
+      border:1px solid var(--stroke); background: rgba(255,255,255,.03);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+    }
+    .item:hover{transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.16)}
+    .item h3{margin:0;font-size:14px;letter-spacing:-.1px;}
+    .item .sub{margin:6px 0 0;font-size:12px;color:var(--muted);line-height:1.55;}
+
+    .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+    .tag{font-size:11px;padding:6px 8px;border-radius:999px;border:1px solid var(--stroke);background: rgba(255,255,255,.03);color:var(--muted);}
+
+    .proj-grid{display:grid;grid-template-columns: repeat(3, 1fr);gap:12px;}
+    @media (max-width: 980px){ .proj-grid{grid-template-columns:1fr 1fr} }
+    @media (max-width: 640px){ .proj-grid{grid-template-columns:1fr} }
+
+    .project{
+      padding:16px;border-radius: 20px;border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      position:relative;overflow:hidden;
+      transition: transform .18s ease, border-color .2s ease;
+      min-height:210px; /* denser */
+    }
+    .project:hover{transform: translateY(-2px); border-color: rgba(6,182,212,.35)}
+    .project:before{
+      content:""; position:absolute; inset:-60px;
+      background:
+        radial-gradient(180px 140px at var(--x, 20%) var(--y, 20%), rgba(6,182,212,.22), transparent 60%),
+        radial-gradient(220px 160px at calc(var(--x, 20%) + 30%) calc(var(--y, 20%) + 20%), rgba(124,58,237,.18), transparent 60%);
+      opacity:.9; transition: opacity .2s ease;
+    }
+    .project > *{position:relative}
+    .project h3{margin:0 0 8px;font-size:14px}
+    .project p{
+      margin:0;font-size:12px;color:var(--muted);line-height:1.6;
+      display:-webkit-box; -webkit-line-clamp:6; -webkit-box-orient:vertical; overflow:hidden;
+    }
+    .project .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .mini{
+      font-size:11px;padding:7px 9px;border-radius: 999px;
+      border:1px solid var(--stroke);background: rgba(255,255,255,.03);
+      display:inline-flex; align-items:center;
+    }
+
+    footer{
+      padding:26px 0 0;
+      color:var(--muted2);
+      font-size:12px;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      border-top:1px solid var(--stroke);
+      margin-top:24px;
+    }
+
+    .reveal{opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease}
+    .reveal.visible{opacity:1; transform:none}
+
+    .blob{
+      position:fixed;width:520px;height:520px;
+      border-radius: 45% 55% 52% 48% / 55% 45% 55% 45%;
+      filter: blur(28px); opacity:.18; z-index:0;
+      animation: blobMove 18s ease-in-out infinite;
+      pointer-events:none;
+    }
+    .blob.one{
+      left:-180px; top:-160px;
+      background: radial-gradient(circle at 30% 25%, rgba(124,58,237,1), rgba(124,58,237,0) 60%),
+                  radial-gradient(circle at 70% 70%, rgba(225,29,72,1), rgba(225,29,72,0) 60%);
+    }
+    .blob.two{
+      right:-240px; top:180px; width:560px; height:560px;
+      background: radial-gradient(circle at 30% 25%, rgba(6,182,212,1), rgba(6,182,212,0) 60%),
+                  radial-gradient(circle at 70% 70%, rgba(34,197,94,1), rgba(34,197,94,0) 60%);
+      animation-delay: -7s;
+    }
+
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes blobMove{
+      0%{transform: translate(0,0) scale(1)}
+      33%{transform: translate(60px, 30px) scale(1.06)}
+      66%{transform: translate(10px, 70px) scale(0.98)}
+      100%{transform: translate(0,0) scale(1)}
+    }
+
+    .sep{height:1px;background: var(--stroke); margin:14px 0}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+
+    .toast{
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+      padding:10px 12px; border-radius:999px; border:1px solid var(--stroke);
+      background: rgba(7,10,18,.75); backdrop-filter: blur(10px);
+      color: var(--muted); font-size:12px;
+      opacity:0; pointer-events:none;
+      transition: opacity .25s ease, transform .25s ease;
+      z-index:99;
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-6px)}
+  </style>
+</head>
+
+<body>
+  <div class="blob one"></div>
+  <div class="blob two"></div>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1 id="navName">Vinay Sai Jagannath J</h1>
+          <p id="navRole">Aspiring Actuary • Tech Enthusiast</p>
+        </div>
+      </div>
+      <nav class="nav" id="nav"></nav>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <header class="hero reveal" id="home">
+      <div class="grid">
+        <div class="card">
+          <div class="card-inner">
+            <div class="chip mono" id="heroTop">Open to: Internships • Entry-level • Actuarial / Analytics roles • Bengaluru</div>
+
+            <h1 class="hero-title">
+              Hi, I’m <span class="gradient-text" id="heroName">Vinay</span>.
+              <br/>
+              <span id="heroHeadline">Aspiring Actuary • Tech Enthusiast</span>
+            </h1>
+
+            <p class="subtitle" id="heroSummary"></p>
+
+            <div class="cta">
+              <a class="btn primary" id="btnPrimary" href="#projects">View projects</a>
+              <a class="btn" id="btnResume" target="_blank" rel="noopener noreferrer">Resume</a>
+              <a class="btn" id="btnLinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <button class="btn" id="btnCopy" type="button">Copy email</button>
+            </div>
+
+            <div class="meta-row" id="heroChips"></div>
+
+            <!-- NEW: highlights to reduce empty hero feel -->
+            <div class="highlights" id="highlights"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner" style="height:100%; display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+            <div>
+              <div class="pf-top">
+                <div class="avatar" aria-hidden="true"></div>
+                <div>
+                  <p class="pf-name" id="pfName">Vinay Sai Jagannath J</p>
+                  <p class="pf-role" id="pfRole">BS Actuarial Data Science • SSSIHL</p>
+                </div>
+              </div>
+
+              <div class="kpis" id="kpis"></div>
+              <div class="sep"></div>
+              <div class="list" id="quickFacts"></div>
+            </div>
+
+            <div class="hint" id="statusLine">Dark • Animated • Recruiter-scannable</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section class="reveal" id="about">
+      <div class="section-head">
+        <h2>About</h2>
+        <div class="hint">Short, recruiter-friendly summary</div>
+      </div>
+      <div class="card">
+        <div class="card-inner">
+          <p class="subtitle" style="margin:0; white-space:pre-line" id="aboutText"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="reveal" id="experience">
+      <div class="section-head">
+        <h2>CURRENT POSITION</h2>
+        <div class="hint">Timeline-like cards</div>
+      </div>
+      <div class="two-col" id="expGrid"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="reveal" id="projects">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <div class="hint">Hover for glow • Click for links</div>
+      </div>
+      <div class="proj-grid" id="projGrid"></div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="reveal" id="skills">
+      <div class="section-head">
+        <h2>Skills</h2>
+        <div class="hint">Categorized for clarity</div>
+      </div>
+      <div class="two-col" id="skillsGrid"></div>
+    </section>
+
+    <!-- LANGUAGES -->
+    <section class="reveal" id="languages">
+      <div class="section-head">
+        <h2>Languages</h2>
+        <div class="hint">Proficiency levels (CEFR)</div>
+      </div>
+      <div class="two-col">
+        <div class="item">
+          <h3>English</h3>
+          <div class="sub">Proficient — C2</div>
+        </div>
+        <div class="item">
+          <h3>Hindi</h3>
+          <div class="sub">Intermediate — B1</div>
+        </div>
+        <div class="item">
+          <h3>Telugu</h3>
+          <div class="sub">Native</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="reveal" id="education">
+      <div class="section-head">
+        <h2>Education & Certifications</h2>
+        <div class="hint">Academic + credential highlights</div>
+      </div>
+      <div class="two-col" id="eduGrid"></div>
+      <div class="card" style="margin-top:14px">
+        <div class="card-inner">
+          <h3 style="margin:0 0 8px; font-size:14px;">Certifications</h3>
+          <div class="tags" id="certTags" style="margin-top:0"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="reveal" id="contact">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <div class="hint">Simple + effective</div>
+      </div>
+      <div class="card">
+        <div class="card-inner">
+          <p class="subtitle" id="contactText" style="margin-top:0"></p>
+          <div class="cta" style="margin-top:10px">
+            <a class="btn primary" id="btnEmail" target="_blank" rel="noopener noreferrer">Email me</a>
+            <a class="btn" id="btnGitHub" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="btn" id="btnPhone" target="_blank" rel="noopener noreferrer">Call</a>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div>© <span id="year"></span> <span id="footerName">Vinay Sai Jagannath J</span></div>
+        <div class="mono" id="footerMeta">Built with HTML • CSS • JS</div>
+      </footer>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">Copied</div>
+
+  <script>
+    // =========================
+    // EDIT THIS DATA ONLY ✅
+    // =========================
+    const PROFILE = {
+      name: "Vinay Sai Jagannath J",
+      headline: "Aspiring Actuary • Tech Enthusiast",
+      location: "Bengaluru, Karnataka, India",
+      openTo: "Internships • Entry-level • Actuarial / Analytics roles • Bengaluru",
+
+      email: "vinaaysai@gmail.com",
+      phone: "+91 8977501150",
+
+      resumeUrl: "resume.pdf", // keep in same folder
+      linkedInUrl: "https://www.linkedin.com/in/vinay-sai-jagannath-j",
+      githubUrl: "#",
+
+      heroSummary:
+        "Organized and motivated Actuarial Data Science student with strong time management and analytical skills. "
+        + "Comfortable working with data-driven software applications and automation tools. "
+        + "Demonstrates clear communication, structured problem-solving, and the ability to contribute reliably in collaborative environments.",
+
+      about:
+        "I am an organized and motivated Actuarial Data Science student with a strong foundation in analytics, software tools, and structured problem-solving.\n\n"
+        + "I am proficient in working with technical applications, data handling, and automation-based solutions. My academic and project experience "
+        + "has strengthened my ability to manage time effectively, communicate clearly, and work collaboratively in diverse settings.\n\n"
+        + "I am eager to contribute to organizational growth while continuously improving my professional and technical skill set, "
+        + "particularly in actuarial science, risk assessment, and data analytics.",
+
+      chips: [
+        "Actuarial Data Science",
+        "Risk & Insurance Analytics",
+        "Python • SQL • Qt5",
+        "Automation & Optimization"
+      ],
+
+      // NEW: fills empty hero space
+      highlights: [
+        { title: "Actuarial Focus", text: "Pricing • reserving basics • risk assessment • probability & statistics." },
+        { title: "Project Work", text: "Timetable optimization + Cyber risk pricing framework (slides live)." },
+        { title: "Tools", text: "Python • MySQL • Pandas • SQL • Excel • Qt5." }
+      ],
+
+      kpis: [
+        { value: "BS", label: "Actuarial Data Science" },
+        { value: "2028", label: "Expected Graduation" },
+        { value: "Open", label: "To Internships" },
+        { value: "3+", label: "Projects (growing)" }
+      ],
+
+      quickFacts: [
+        { title: "Contact", text: "Bengaluru • vinaaysai@gmail.com" },
+        {
+          title: "Top Skills",
+          text: "Python • MySQL • Pandas • Cyber Risk Insurance • Dynamic Pricing Models • Analytical Skills • Problem Solving • Artificial Intelligence • Communication"
+        },
+        { title: "Looking for", text: "Actuarial / Analytics internships + Data science internships + entry roles" },
+        { title: "Currently learning", text: "Actuarial math + data analytics + insurance applications of AI." }
+      ],
+
+      experience: [
+        {
+          role: "Student Lead [Maintenance team]",
+          org: "Sri Sathya Sai Institute of Higher Learning",
+          period: "May 2024 — Present [co-curricular]",
+          bullets: [
+            "Pursuing BS Actuarial Data Science (SSSIHL), Puttaparthy campus.",
+            "Strengthening fundamentals in probability, statistics, and analytics.",
+            "Applying Python/SQL skills through academic and independent projects."
+          ],
+          tags: ["Actuarial", "Statistics", "Analytics"]
+        }
+      ],
+
+      projects: [
+        {
+          name: "Automatic Timetable Generator with Preferences",
+          desc:
+            "Designed and developed a system to automate school timetable creation. "
+            + "Generates conflict-free schedules by enforcing hard constraints "
+            + "(teacher availability, room/time clashes) while optimizing soft constraints "
+            + "such as teacher preferred time slots using heuristic/optimization-style logic.",
+          tags: ["Python", "SQL", "Qt5", "Scheduling", "Optimization"],
+          links: [
+            { label: "Code", url: "#" },
+            { label: "Demo", url: "#" }
+          ]
+        },
+        {
+          name: "Cyber Risk Insurance — Data-Driven Risk Assessment & Dynamic Pricing Model",
+          desc:
+            "Built a conceptual, data-driven cyber insurance pricing framework focused on dynamic premium estimation. "
+            + "Structured key assumptions for revenue/premium computation and treated potential outliers to stabilize pricing. "
+            + "Positioned the model to support risk-based premium justification, proactive risk management, and improved claim forecasting—"
+            + "benefiting both insurers (competitive advantage, forecasting) and insured organizations (fair premiums, transparency).",
+          tags: ["Cyber Risk", "Insurance Pricing", "Dynamic Pricing", "Risk Assessment", "Analytics"],
+          links: [
+            { label: "Slides", url: "https://docs.google.com/presentation/d/e/2PACX-1vR__jL9NY9JCYWoKJqsXMYTjK0NI2l7bEJv5HAgWbKpH6CU80UvfR0LgSCKYbNzRSDh4UziShEvFxRh/pub?start=true&loop=false&delayms=3000" }
+          ]
+        },
+        {
+          name: "Mini Analytics Dashboard (Coming Soon)",
+          desc:
+            "A simple analytics dashboard to summarize datasets, build quick charts, and generate recruiter-friendly insights. "
+            + "Planned: data upload, cleaning helpers, and summary reports.",
+          tags: ["Python", "Pandas", "Visualization"],
+          links: [
+            { label: "Coming soon", url: "#" }
+          ]
+        }
+      ],
+
+      skills: [
+        { group: "Data & Actuarial", items: ["Data Analysis", "Statistical Modelling", "Cyber Risk Insurance", "Dynamic Pricing Models", "Risk Assessment"] },
+        { group: "Programming & Tools", items: ["Python", "SQL", "MySQL", "Pandas", "Database Management Systems (DBMS)", "Qt5"] },
+        { group: "Analytics & ML", items: ["Data Visualisation", "Machine Learning (Basics)"] },
+        { group: "Professional Skills", items: ["Communication", "Team Collaboration", "Analytical Thinking", "Problem Solving"] },
+        { group: "Organisational", items: ["Time Management", "Project Coordination", "Event Management", "Team Leadership"] }
+      ],
+
+      education: [
+        {
+          title: "Bachelor of Science (Actuarial Data Science)",
+          place: "Sri Sathya Sai Institute of Higher Learning",
+          period: "June 2024 — May 2028",
+          notes: "Puttaparthy, Andhra Pradesh, India."
+        },
+        {
+          title: "11th & 12th Grade (Mathematics, Computer Science, Accountancy, Economics)",
+          place: "Sri Sathya Sai Higher Secondary School",
+          period: "June 2022 — April 2024",
+          notes: ""
+        },
+        {
+          title: "1st — 10th Grade",
+          place: "Sri Sathya Sai Higher Secondary School",
+          period: "July 2012 — April 2022",
+          notes: ""
+        }
+      ],
+
+      certifications: [
+        "ACET — Institute of Actuaries of India (May 2024)",
+        "CAS Student Program — Casualty Actuarial Society",
+        "Introduction to Python — DataCamp (Feb 2026)",
+        "Introduction to SQL — DataCamp (Feb 2026)",
+        "Artificial Intelligence Fundamentals — IBM"
+      ],
+
+      contactText:
+        "For internships, entry-level opportunities, or collaborations in actuarial/data roles, email is best. "
+        + "You can also reach me on LinkedIn."
+    };
+
+    // =========================
+    // RENDER
+    // =========================
+    const $ = (sel) => document.querySelector(sel);
+    function setText(sel, val){ const el = $(sel); if(el) el.textContent = val; }
+    function setHref(sel, val){ const el = $(sel); if(el) el.href = val; }
+
+    setText("#navName", PROFILE.name);
+    setText("#navRole", PROFILE.headline);
+    setText("#heroName", (PROFILE.name || "Vinay").split(" ")[0]);
+    setText("#heroHeadline", PROFILE.headline);
+    setText("#heroTop", `Open to: ${PROFILE.openTo} • ${PROFILE.location}`);
+    setText("#heroSummary", PROFILE.heroSummary);
+    setText("#pfName", PROFILE.name);
+    setText("#pfRole", "BS Actuarial Data Science • SSSIHL");
+    setText("#aboutText", PROFILE.about);
+    setText("#contactText", PROFILE.contactText);
+    setText("#footerName", PROFILE.name);
+    setText("#year", new Date().getFullYear());
+
+    setHref("#btnResume", PROFILE.resumeUrl || "#");
+    setHref("#btnLinkedIn", PROFILE.linkedInUrl || "#");
+    setHref("#btnGitHub", PROFILE.githubUrl || "#");
+
+    // hero chips
+    const chips = $("#heroChips");
+    if (chips){
+      chips.innerHTML = "";
+      (PROFILE.chips || []).forEach(t => {
+        const span = document.createElement("span");
+        span.className = "chip";
+        span.textContent = t;
+        chips.appendChild(span);
+      });
+    }
+
+    // NEW: hero highlights
+    const highlights = $("#highlights");
+    if (highlights){
+      highlights.innerHTML = "";
+      (PROFILE.highlights || []).forEach(h => {
+        const div = document.createElement("div");
+        div.className = "hitem";
+        div.innerHTML = `<strong>${h.title}</strong><span>${h.text}</span>`;
+        highlights.appendChild(div);
+      });
+    }
+
+    // KPIs
+    const kpis = $("#kpis");
+    if (kpis){
+      kpis.innerHTML = "";
+      (PROFILE.kpis || []).forEach(k => {
+        const div = document.createElement("div");
+        div.className = "kpi";
+        div.innerHTML = `<strong>${k.value}</strong><span>${k.label}</span>`;
+        kpis.appendChild(div);
+      });
+    }
+
+    // Quick facts
+    const qf = $("#quickFacts");
+    if (qf){
+      qf.innerHTML = "";
+      (PROFILE.quickFacts || []).forEach(f => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<h3>${f.title}</h3><div class="sub">${f.text}</div>`;
+        qf.appendChild(div);
+      });
+    }
+
+    // Experience cards
+    const expGrid = $("#expGrid");
+    if (expGrid){
+      expGrid.innerHTML = "";
+      (PROFILE.experience || []).forEach(x => {
+        const card = document.createElement("div");
+        card.className = "item";
+        const bullets = (x.bullets||[]).map(b => `<li>${b}</li>`).join("");
+        const tags = (x.tags||[]).map(t => `<span class="tag">${t}</span>`).join("");
+        card.innerHTML = `
+          <h3>${x.role} • <span style="color:var(--muted)">${x.org}</span></h3>
+          <div class="sub mono" style="margin-top:6px">${x.period}</div>
+          <div class="sub" style="margin-top:10px">
+            <ul style="margin:0; padding-left:18px; line-height:1.6; color:var(--muted)">${bullets}</ul>
+          </div>
+          <div class="tags">${tags}</div>
+        `;
+        expGrid.appendChild(card);
+      });
+    }
+
+    // Projects
+    const projGrid = $("#projGrid");
+    if (projGrid){
+      projGrid.innerHTML = "";
+      (PROFILE.projects || []).forEach(p => {
+        const div = document.createElement("div");
+        div.className = "project";
+        const tags = (p.tags||[]).map(t => `<span class="tag">${t}</span>`).join("");
+        const links = (p.links||[]).map(l => {
+          const safe = l.url && l.url !== "#" ? l.url : "#";
+          return `<a class="mini" href="${safe}" target="_blank" rel="noopener noreferrer">${l.label}</a>`;
+        }).join("");
+        div.innerHTML = `
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <div class="tags">${tags}</div>
+          <div class="links">${links}</div>
+        `;
+        projGrid.appendChild(div);
+      });
+    }
+
+    // Skills
+    const skillsGrid = $("#skillsGrid");
+    if (skillsGrid){
+      skillsGrid.innerHTML = "";
+      (PROFILE.skills || []).forEach(s => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <h3>${s.group}</h3>
+          <div class="tags" style="margin-top:10px">
+            ${(s.items || []).map(i => `<span class="tag">${i}</span>`).join("")}
+          </div>
+        `;
+        skillsGrid.appendChild(div);
+      });
+    }
+
+    // Education
+    const eduGrid = $("#eduGrid");
+    if (eduGrid){
+      eduGrid.innerHTML = "";
+      (PROFILE.education || []).forEach(e => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <h3>${e.title}</h3>
+          <div class="sub">${e.place} • <span class="mono">${e.period}</span></div>
+          ${e.notes ? `<div class="sub" style="margin-top:8px">${e.notes}</div>` : ``}
+        `;
+        eduGrid.appendChild(div);
+      });
+    }
+
+    // Certifications
+    const certTags = $("#certTags");
+    if (certTags){
+      certTags.innerHTML = "";
+      (PROFILE.certifications || []).forEach(c => {
+        const span = document.createElement("span");
+        span.className = "tag";
+        span.textContent = c;
+        certTags.appendChild(span);
+      });
+    }
+
+    // Contact buttons
+    const btnEmail = $("#btnEmail");
+    if (btnEmail){
+      const emailHref = `mailto:${PROFILE.email}?subject=Hello%20${encodeURIComponent(PROFILE.name)}`;
+      btnEmail.href = emailHref;
+      btnEmail.textContent = `Email: ${PROFILE.email}`;
+    }
+
+    const btnPhone = $("#btnPhone");
+    if (btnPhone){
+      btnPhone.href = `tel:${(PROFILE.phone || "").replace(/\s+/g,'')}`;
+      btnPhone.textContent = `Call: ${PROFILE.phone}`;
+    }
+
+    // Copy email
+    const toast = $("#toast");
+    const btnCopy = $("#btnCopy");
+    if (btnCopy && toast){
+      btnCopy.addEventListener("click", async () => {
+        try{ await navigator.clipboard.writeText(PROFILE.email); toast.textContent = "Email copied ✅"; }
+        catch(e){ toast.textContent = "Copy failed (browser blocked)"; }
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 1400);
+      });
+    }
+
+    // Nav + scrollspy
+    const sections = [
+      { id:"home", label:"Home" },
+      { id:"about", label:"About" },
+      { id:"experience", label:"CURRENT POSITION" },
+      { id:"projects", label:"Projects" },
+      { id:"skills", label:"Skills" },
+      { id:"languages", label:"Languages" },
+      { id:"education", label:"Education" },
+      { id:"contact", label:"Contact" },
+    ];
+    const nav = $("#nav");
+    if (nav){
+      nav.innerHTML = "";
+      sections.forEach(s => {
+        const a = document.createElement("a");
+        a.className = "pill";
+        a.href = `#${s.id}`;
+        a.textContent = s.label;
+        nav.appendChild(a);
+      });
+
+      // Smooth scroll
+      document.addEventListener("click", (e) => {
+        const a = e.target.closest('a[href^="#"]');
+        if(!a) return;
+        const id = a.getAttribute("href").slice(1);
+        const el = document.getElementById(id);
+        if(el){
+          e.preventDefault();
+          el.scrollIntoView({behavior:"smooth", block:"start"});
+        }
+      });
+
+      // Reveal on scroll
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(ent => { if(ent.isIntersecting) ent.target.classList.add("visible"); });
+      }, { threshold: 0.15 });
+      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+      // Scrollspy active pill
+      const spy = new IntersectionObserver((entries) => {
+        const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+        if(!visible) return;
+        const id = visible.target.id;
+        [...nav.querySelectorAll(".pill")].forEach(p => {
+          p.classList.toggle("active", p.getAttribute("href") === `#${id}`);
+        });
+      }, { rootMargin: "-30% 0px -60% 0px", threshold: [0.08, 0.15, 0.25] });
+
+      sections.forEach(s => {
+        const el = document.getElementById(s.id);
+        if(el) spy.observe(el);
+      });
+    }
+
+    // Project glow follows mouse
+    document.addEventListener("mousemove", (e) => {
+      document.querySelectorAll(".project").forEach(card => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width) * 100;
+        const y = ((e.clientY - r.top) / r.height) * 100;
+        card.style.setProperty("--x", `${x}%`);
+        card.style.setProperty("--y", `${y}%`);
+      });
+    });
+  </script>
+</body>
+</html>
