@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Vinay Sai Jagannath J — Portfolio</title>
-  <meta name="description" content="Dark animated portfolio website" />
+  <title>Vinay Sai Jagannath Jonna — Portfolio</title>
+  <meta name="description" content="Actuarial Data Science student • Data Science • Tech-Driven Mindset" />
+  <link rel="icon" type="image/png" href="logo.png?v=20260421" />
+  <link rel="shortcut icon" href="logo.png?v=20260421" />
   <style>
     :root{
       --bg:#070A12;
@@ -16,28 +18,33 @@
       --shadow: 0 20px 80px rgba(0,0,0,.55);
       --radius: 18px;
       --radius2: 26px;
-
-      --a:#7C3AED; /* violet */
-      --b:#06B6D4; /* cyan */
-      --c:#22C55E; /* green */
-      --e:#E11D48; /* rose */
+      --a:#7C3AED;
+      --b:#06B6D4;
+      --c:#22C55E;
+      --e:#E11D48;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       color:var(--text);
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background:
-        radial-gradient(1200px 800px at 15% 10%, rgba(124,58,237,.20), transparent 55%),
-        radial-gradient(900px 700px at 85% 15%, rgba(6,182,212,.18), transparent 55%),
-        radial-gradient(900px 700px at 50% 90%, rgba(34,197,94,.12), transparent 55%),
-        linear-gradient(180deg, #050713 0%, #070A12 35%, #050713 100%);
+      background-color: #070A12;
       overflow-x:hidden;
     }
-
-    /* subtle noise overlay */
+    /* Continuous fixed background — no scroll-repeat artifacts */
+    body:after{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        radial-gradient(ellipse 1400px 900px at 15% 8%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(ellipse 1000px 800px at 88% 12%, rgba(6,182,212,.18), transparent 60%),
+        radial-gradient(ellipse 1000px 900px at 50% 95%, rgba(34,197,94,.13), transparent 60%),
+        radial-gradient(ellipse 800px 600px at 10% 60%, rgba(124,58,237,.08), transparent 55%),
+        radial-gradient(ellipse 700px 500px at 80% 70%, rgba(6,182,212,.07), transparent 55%);
+      pointer-events:none;
+      z-index:0;
+    }
     body:before{
       content:"";
       position:fixed; inset:0;
@@ -47,14 +54,13 @@
       mix-blend-mode:overlay;
       z-index:0;
     }
-
     a{color:inherit; text-decoration:none}
     .wrap{position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:28px 18px 80px}
 
     .topbar{
       position:sticky; top:0; z-index:10;
       backdrop-filter: blur(14px);
-      background: linear-gradient(180deg, rgba(7,10,18,.78), rgba(7,10,18,.55));
+      background: linear-gradient(180deg, rgba(7,10,18,.80), rgba(7,10,18,.60));
       border-bottom:1px solid var(--stroke);
     }
     .topbar-inner{
@@ -62,10 +68,10 @@
       padding:14px 18px;
       display:flex; align-items:center; gap:14px; justify-content:space-between;
     }
-    .brand{display:flex; align-items:center; gap:12px; min-width:240px;}
+    .brand{display:flex; align-items:center; gap:12px; min-width:260px;}
     .logo{
       width:40px; height:40px; border-radius:12px;
-      background-image:url('logo.png');
+      background-image:url('logo.png?v=20260421');
       background-size:cover;
       background-position:center;
       background-repeat:no-repeat;
@@ -73,7 +79,6 @@
       box-shadow: 0 10px 30px rgba(0,0,0,.35);
       position:relative; overflow:hidden;
     }
-
     .logo:after{
       content:"";
       position:absolute; inset:-60%;
@@ -84,10 +89,10 @@
     .brand h1{margin:0;font-size:14px;letter-spacing:.2px;line-height:1.2}
     .brand p{margin:0;font-size:12px;color:var(--muted)}
 
-    .nav{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    .nav{display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
     .pill{
-      font-size:12px;
-      padding:10px 12px;
+      font-size:11.5px;
+      padding:9px 12px;
       border:1px solid var(--stroke);
       background:rgba(255,255,255,.04);
       border-radius:999px;
@@ -97,10 +102,118 @@
     .pill:hover{transform: translateY(-1px); background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.16)}
     .pill.active{background:rgba(6,182,212,.14); border-color:rgba(6,182,212,.30)}
 
-    .hero{padding:28px 0 18px}
-    .grid{display:grid; grid-template-columns: 1.35fr .65fr; gap:18px; align-items:stretch;}
-    @media (max-width: 880px){ .grid{grid-template-columns:1fr} .brand{min-width:auto} }
+    /* ── HERO: full-width, no card boxes ── */
+    .hero{
+      padding: 60px 0 52px;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 48px;
+      align-items: stretch;
+      border-bottom: 1px solid var(--stroke);
+      margin-bottom: 8px;
+    }
+    .hero > div:first-child{
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    @media(max-width:820px){
+      .hero{ grid-template-columns:1fr; gap:32px; padding:40px 0 36px; }
+      .hero-photo-col{ display:flex; justify-content:center; order:-1; }
+    }
 
+    /* Photo column */
+    .hero-photo-col{ display:flex; flex-direction:column; align-items:center; gap:16px; }
+    .avatar{
+      width:210px; height:210px; border-radius:32px;
+      border:1px solid rgba(255,255,255,.16);
+      position:relative; overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: 0 24px 60px rgba(0,0,0,.48), 0 0 0 1px rgba(255,255,255,.05) inset;
+      margin:0 auto;
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      object-position:center 14%;
+      transform:scale(1.22);
+      transform-origin:center;
+      filter:brightness(1.05) contrast(1.1) saturate(1.1);
+      image-rendering:-webkit-optimize-contrast;
+    }
+    .avatar:before{
+      content:"";
+      position:absolute; inset:auto -12% -18% -12%;
+      height:52%;
+      background: radial-gradient(circle at 50% 50%, rgba(6,182,212,.18), transparent 68%);
+      filter:blur(20px);
+      pointer-events:none;
+    }
+    .avatar:after{
+      content:"";
+      position:absolute; inset:0;
+      border-radius:inherit;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -18px 30px rgba(7,10,18,.14);
+      pointer-events:none;
+    }
+    .kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;}
+    .kpi{
+      padding:10px 12px;border-radius:14px;
+      border:1px solid var(--stroke);background: rgba(255,255,255,.03);
+      text-align:center;
+    }
+    .kpi strong{display:block;font-size:15px;font-weight:700;}
+    .kpi span{display:block;font-size:10px;color:var(--muted2);margin-top:3px}
+
+    /* Text column */
+    .hero-title{font-size:48px;line-height:1.02;margin:0 0 12px;letter-spacing:-1.2px;}
+    @media(max-width:640px){.hero-title{font-size:34px;}}
+    .gradient-text{
+      background: linear-gradient(90deg, rgba(124,58,237,1), rgba(6,182,212,1), rgba(34,197,94,1));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .subtitle{margin:0 0 18px;color:var(--muted);font-size:15px;line-height:1.65;max-width:68ch;}
+    .section-copy{margin:0;color:var(--muted);font-size:15px;line-height:1.75;max-width:none;width:100%;white-space:pre-line;}
+    .cta{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px;}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:11px 16px; border-radius: 14px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      font-size:13px; user-select:none; cursor:pointer;
+      color:var(--text);
+      font-family:inherit;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.85));
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 18px 55px rgba(6,182,212,.18);
+    }
+
+    .meta-row{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;color:var(--muted2);font-size:12px;}
+    .chip{padding:7px 11px;border-radius:999px;border:1px solid var(--stroke);background: rgba(255,255,255,.04);}
+
+    .highlights{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 640px){ .highlights{grid-template-columns:1fr 1fr} }
+    .hitem{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      padding:12px 14px;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+    }
+    .hitem:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18)}
+    .hitem strong{display:block;font-size:12px;letter-spacing:.1px;color:var(--text);}
+    .hitem span{display:block;margin-top:5px;font-size:11.5px;color:var(--muted);line-height:1.55}
+
+    /* ── CARDS (used in sections below hero) ── */
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
       border:1px solid var(--stroke);
@@ -110,77 +223,9 @@
       position:relative;
     }
     .card-inner{padding:22px}
-    .hero-title{font-size:40px;line-height:1.05;margin:4px 0 10px;letter-spacing:-.8px;}
-    .gradient-text{
-      background: linear-gradient(90deg, rgba(124,58,237,1), rgba(6,182,212,1), rgba(34,197,94,1));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .subtitle{margin:0 0 18px;color:var(--muted);font-size:15px;line-height:1.6;max-width:70ch;}
-    .cta{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:12px;}
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:11px 14px; border-radius: 14px;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.04);
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-      font-size:13px; user-select:none;
-      cursor:pointer;
-    }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.16)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.85));
-      border-color: rgba(255,255,255,.12);
-      box-shadow: 0 18px 55px rgba(6,182,212,.18);
-    }
 
-    .meta-row{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;color:var(--muted2);font-size:12px;}
-    .chip{padding:8px 10px;border-radius:999px;border:1px solid var(--stroke);background: rgba(255,255,255,.03);}
-
-    /* NEW: hero highlights to reduce empty look */
-    .highlights{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-    }
-    @media (max-width: 640px){ .highlights{grid-template-columns:1fr} }
-    .hitem{
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
-      padding:12px;
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-    }
-    .hitem:hover{transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.16)}
-    .hitem strong{display:block;font-size:12px;letter-spacing:.2px}
-    .hitem span{display:block;margin-top:6px;font-size:12px;color:var(--muted);line-height:1.55}
-
-    .pf-top{display:flex;align-items:center;gap:14px}
-    .avatar{
-      width:62px;height:62px;border-radius:20px;
-      border:1px solid rgba(255,255,255,.14);
-      background: url('pic.png') center/cover no-repeat;
-      position:relative;overflow:hidden;
-    }
-    .avatar:before{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(circle at 35% 25%, rgba(255,255,255,.20), transparent 55%),
-                  linear-gradient(135deg, rgba(225,29,72,.12), rgba(124,58,237,.12));
-      mix-blend-mode: screen;
-      opacity:.9;
-    }
-    .avatar:after{
-      content:""; position:absolute; inset:-40%;
-      background: conic-gradient(from 90deg, rgba(255,255,255,0), rgba(255,255,255,.18), rgba(255,255,255,0));
-      animation: spin 7.5s linear infinite; opacity:.55;
-    }
-    .pf-name{margin:0;font-size:14px;line-height:1.2}
+    .pf-name{margin:0;font-size:14px;line-height:1.2;font-weight:600;}
     .pf-role{margin:3px 0 0;font-size:12px;color:var(--muted)}
-    .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
-    .kpi{padding:12px;border-radius:16px;border:1px solid var(--stroke);background: rgba(255,255,255,.03);}
-    .kpi strong{display:block;font-size:14px}
-    .kpi span{display:block;font-size:12px;color:var(--muted2);margin-top:4px}
 
     section{padding:18px 0}
     .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 10px;}
@@ -203,7 +248,7 @@
     .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
     .tag{font-size:11px;padding:6px 8px;border-radius:999px;border:1px solid var(--stroke);background: rgba(255,255,255,.03);color:var(--muted);}
 
-    .proj-grid{display:grid;grid-template-columns: repeat(3, 1fr);gap:12px;}
+    .proj-grid{display:grid;grid-template-columns: repeat(2, 1fr);gap:12px;}
     @media (max-width: 980px){ .proj-grid{grid-template-columns:1fr 1fr} }
     @media (max-width: 640px){ .proj-grid{grid-template-columns:1fr} }
 
@@ -212,7 +257,7 @@
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       position:relative;overflow:hidden;
       transition: transform .18s ease, border-color .2s ease;
-      min-height:210px; /* denser */
+      min-height:210px;
     }
     .project:hover{transform: translateY(-2px); border-color: rgba(6,182,212,.35)}
     .project:before{
@@ -226,7 +271,7 @@
     .project h3{margin:0 0 8px;font-size:14px}
     .project p{
       margin:0;font-size:12px;color:var(--muted);line-height:1.6;
-      display:-webkit-box; -webkit-line-clamp:6; -webkit-box-orient:vertical; overflow:hidden;
+      display:-webkit-box; -webkit-line-clamp:7; -webkit-box-orient:vertical; overflow:hidden;
     }
     .project .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
     .mini{
@@ -234,6 +279,19 @@
       border:1px solid var(--stroke);background: rgba(255,255,255,.03);
       display:inline-flex; align-items:center;
     }
+    .mini:hover{background:rgba(6,182,212,.10);border-color:rgba(6,182,212,.30)}
+
+    /* Training / certifications badge */
+    .training-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media(max-width:640px){.training-grid{grid-template-columns:1fr}}
+    .t-item{
+      padding:14px;border-radius:var(--radius);
+      border:1px solid var(--stroke); background: rgba(255,255,255,.03);
+      transition: transform .15s ease, background .2s ease;
+    }
+    .t-item:hover{transform:translateY(-1px);background:rgba(255,255,255,.05)}
+    .t-item h3{margin:0;font-size:13px;}
+    .t-item .sub{margin:5px 0 0;font-size:12px;color:var(--muted)}
 
     footer{
       padding:26px 0 0;
@@ -247,32 +305,9 @@
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease}
     .reveal.visible{opacity:1; transform:none}
 
-    .blob{
-      position:fixed;width:520px;height:520px;
-      border-radius: 45% 55% 52% 48% / 55% 45% 55% 45%;
-      filter: blur(28px); opacity:.18; z-index:0;
-      animation: blobMove 18s ease-in-out infinite;
-      pointer-events:none;
-    }
-    .blob.one{
-      left:-180px; top:-160px;
-      background: radial-gradient(circle at 30% 25%, rgba(124,58,237,1), rgba(124,58,237,0) 60%),
-                  radial-gradient(circle at 70% 70%, rgba(225,29,72,1), rgba(225,29,72,0) 60%);
-    }
-    .blob.two{
-      right:-240px; top:180px; width:560px; height:560px;
-      background: radial-gradient(circle at 30% 25%, rgba(6,182,212,1), rgba(6,182,212,0) 60%),
-                  radial-gradient(circle at 70% 70%, rgba(34,197,94,1), rgba(34,197,94,0) 60%);
-      animation-delay: -7s;
-    }
+    /* blobs removed — background handled by body:after fixed layer */
 
     @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes blobMove{
-      0%{transform: translate(0,0) scale(1)}
-      33%{transform: translate(60px, 30px) scale(1.06)}
-      66%{transform: translate(10px, 70px) scale(0.98)}
-      100%{transform: translate(0,0) scale(1)}
-    }
 
     .sep{height:1px;background: var(--stroke); margin:14px 0}
     .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
@@ -287,20 +322,23 @@
       z-index:99;
     }
     .toast.show{opacity:1; transform:translateX(-50%) translateY(-6px)}
+
+    /* GPA badge */
+    .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;
+      border:1px solid rgba(34,197,94,.30);background:rgba(34,197,94,.08);
+      font-size:11px;color:rgba(34,197,94,.9);margin-top:8px;}
   </style>
 </head>
 
 <body>
-  <div class="blob one"></div>
-  <div class="blob two"></div>
 
   <div class="topbar">
     <div class="topbar-inner">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div>
-          <h1 id="navName">Vinay Sai Jagannath J</h1>
-          <p id="navRole">Aspiring Actuary • Tech Enthusiast</p>
+          <h1 id="navName">Vinay Sai Jagannath Jonna</h1>
+          <p id="navRole">Actuary in Training • Data Science • Tech-Driven</p>
         </div>
       </div>
       <nav class="nav" id="nav"></nav>
@@ -308,55 +346,75 @@
   </div>
 
   <main class="wrap">
-    <!-- HERO -->
+    <!-- HERO — full width, no card boxes, one continuous background -->
     <header class="hero reveal" id="home">
-      <div class="grid">
-        <div class="card">
-          <div class="card-inner">
-            <div class="chip mono" id="heroTop">Open to: Internships • Entry-level • Actuarial / Analytics roles • Bengaluru</div>
 
-            <h1 class="hero-title">
-              Hi, I’m <span class="gradient-text" id="heroName">Vinay</span>.
-              <br/>
-              <span id="heroHeadline">Aspiring Actuary • Tech Enthusiast</span>
-            </h1>
-
-            <p class="subtitle" id="heroSummary"></p>
-
-            <div class="cta">
-              <a class="btn primary" id="btnPrimary" href="#projects">View projects</a>
-              <a class="btn" id="btnResume" target="_blank" rel="noopener noreferrer">Resume</a>
-              <a class="btn" id="btnLinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <button class="btn" id="btnCopy" type="button">Copy email</button>
-            </div>
-
-            <div class="meta-row" id="heroChips"></div>
-
-            <!-- NEW: highlights to reduce empty hero feel -->
-            <div class="highlights" id="highlights"></div>
-          </div>
+      <div>
+        <div class="chip mono" style="display:inline-block;margin-bottom:20px;">
+          Open to: Internships · Entry-level · Actuarial / Analytics / Data Science
         </div>
 
-        <div class="card">
-          <div class="card-inner" style="height:100%; display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
-            <div>
-              <div class="pf-top">
-                <div class="avatar" aria-hidden="true"></div>
-                <div>
-                  <p class="pf-name" id="pfName">Vinay Sai Jagannath J</p>
-                  <p class="pf-role" id="pfRole">BS Actuarial Data Science • SSSIHL</p>
-                </div>
-              </div>
+        <h1 class="hero-title">
+          Hi, I'm <span class="gradient-text">Vinay</span>.<br>
+          <span style="font-size:24px;font-weight:500;color:var(--muted);letter-spacing:-.3px;">
+            Actuary in Training · Data Science · Tech-Driven Mindset
+          </span>
+        </h1>
 
-              <div class="kpis" id="kpis"></div>
-              <div class="sep"></div>
-              <div class="list" id="quickFacts"></div>
-            </div>
+        <p class="subtitle">
+          Actuarial data science student skilled in analytics, machine learning, and modeling.
+          I enjoy turning complex data into simple, useful insights and working through problems in a clear, organized way.
+          Hands-on experience blending ML, automation, and teamwork — looking to support strong risk and data-focused work.
+        </p>
 
-            <div class="hint" id="statusLine">Dark • Animated • Recruiter-scannable</div>
+        <div class="cta">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="Vinay Sai Jagannath Resume.pdf" target="_blank" rel="noopener noreferrer">📄 Resume</a>
+          <a class="btn" href="https://www.linkedin.com/in/vinay-sai-jagannath-j" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn" href="https://github.com/vinaaysai" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <button class="btn" id="btnCopy" type="button">Copy Email</button>
+        </div>
+
+        <div class="meta-row">
+          <span class="chip">Actuarial Data Science</span>
+          <span class="chip">Risk &amp; Insurance Analytics</span>
+          <span class="chip">Python · SQL · PySpark</span>
+          <span class="chip">ML &amp; Predictive Modeling</span>
+          <span class="chip">Full-Stack Dev</span>
+        </div>
+
+        <div class="highlights">
+          <div class="hitem">
+            <strong>Actuarial Focus</strong>
+            <span>ACET certified · CAS Summer Program · Pricing, reserving &amp; risk assessment.</span>
+          </div>
+          <div class="hitem">
+            <strong>4 Projects</strong>
+            <span>Cyber risk pricing · Timetable optimizer · Bhajan Planner · NASA CMAPSS ML pipeline.</span>
+          </div>
+          <div class="hitem">
+            <strong>Tech Stack</strong>
+            <span>Python · R · SQL · PySpark · NumPy · scikit-learn · Qt5 · HTML/CSS/JS.</span>
           </div>
         </div>
       </div>
+
+      <div class="hero-photo-col">
+        <div class="avatar">
+          <img src="pic.png" alt="Portrait of Vinay Sai Jagannath Jonna">
+        </div>
+        <div style="width:100%">
+          <p class="pf-name" style="text-align:center;margin:0 0 2px;">Vinay Sai Jagannath Jonna</p>
+          <p class="pf-role" style="text-align:center;margin:0 0 12px;">BS Actuarial Data Science · SSSIHL</p>
+          <div class="kpis">
+            <div class="kpi"><strong>8.1<span style="font-size:10px">/10</span></strong><span>CGPA</span></div>
+            <div class="kpi"><strong>2027</strong><span>Expected Grad</span></div>
+            <div class="kpi"><strong>Open</strong><span>To Internships</span></div>
+            <div class="kpi"><strong>4+</strong><span>Projects</span></div>
+          </div>
+        </div>
+      </div>
+
     </header>
 
     <!-- ABOUT -->
@@ -367,16 +425,20 @@
       </div>
       <div class="card">
         <div class="card-inner">
-          <p class="subtitle" style="margin:0; white-space:pre-line" id="aboutText"></p>
+          <p class="section-copy">Actuarial data science student skilled in analytics, machine learning, and modeling. I enjoy turning complex data into simple, useful insights and working through problems in a clear, organized way. I've gained hands-on experience through projects that blend ML, automation, and teamwork.
+
+I'm proficient in Python, R, SQL, PySpark, NumPy, scikit-learn, and full-stack web development. My project work spans cyber insurance pricing models, scheduling optimization systems, offline-first web applications, and NASA turbofan RUL prediction pipelines.
+
+Looking for chances to support strong risk and data-focused work while growing my technical and actuarial skill set.</p>
         </div>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
+    <!-- EXPERIENCE / CO-CURRICULAR -->
     <section class="reveal" id="experience">
       <div class="section-head">
-        <h2>CURRENT POSITION</h2>
-        <div class="hint">Timeline-like cards</div>
+        <h2>Experience &amp; Co-Curricular</h2>
+        <div class="hint">Roles &amp; responsibilities</div>
       </div>
       <div class="two-col" id="expGrid"></div>
     </section>
@@ -385,9 +447,18 @@
     <section class="reveal" id="projects">
       <div class="section-head">
         <h2>Projects</h2>
-        <div class="hint">Hover for glow • Click for links</div>
+        <div class="hint">Hover for glow · Click for links</div>
       </div>
       <div class="proj-grid" id="projGrid"></div>
+    </section>
+
+    <!-- TRAINING & CERTIFICATIONS -->
+    <section class="reveal" id="training">
+      <div class="section-head">
+        <h2>Professional Training &amp; Certifications</h2>
+        <div class="hint">Credentials &amp; programs</div>
+      </div>
+      <div class="training-grid" id="trainingGrid"></div>
     </section>
 
     <!-- SKILLS -->
@@ -403,460 +474,331 @@
     <section class="reveal" id="languages">
       <div class="section-head">
         <h2>Languages</h2>
-        <div class="hint">Proficiency levels (CEFR)</div>
+        <div class="hint">Spoken proficiency</div>
       </div>
       <div class="two-col">
-        <div class="item">
-          <h3>English</h3>
-          <div class="sub">Proficient — C2</div>
-        </div>
-        <div class="item">
-          <h3>Hindi</h3>
-          <div class="sub">Intermediate — B1</div>
-        </div>
-        <div class="item">
-          <h3>Telugu</h3>
-          <div class="sub">Native</div>
-        </div>
+        <div class="item"><h3>English</h3><div class="sub">Proficient</div></div>
+        <div class="item"><h3>Hindi</h3><div class="sub">Intermediate</div></div>
+        <div class="item"><h3>Telugu</h3><div class="sub">Native</div></div>
       </div>
     </section>
 
     <!-- EDUCATION -->
     <section class="reveal" id="education">
       <div class="section-head">
-        <h2>Education & Certifications</h2>
-        <div class="hint">Academic + credential highlights</div>
+        <h2>Education</h2>
+        <div class="hint">Academic background</div>
       </div>
       <div class="two-col" id="eduGrid"></div>
-      <div class="card" style="margin-top:14px">
-        <div class="card-inner">
-          <h3 style="margin:0 0 8px; font-size:14px;">Certifications</h3>
-          <div class="tags" id="certTags" style="margin-top:0"></div>
-        </div>
-      </div>
     </section>
 
     <!-- CONTACT -->
     <section class="reveal" id="contact">
       <div class="section-head">
         <h2>Contact</h2>
-        <div class="hint">Simple + effective</div>
+        <div class="hint">Let's connect</div>
       </div>
       <div class="card">
         <div class="card-inner">
-          <p class="subtitle" id="contactText" style="margin-top:0"></p>
+          <p class="subtitle" style="margin-top:0">
+            For internships, entry-level opportunities, or collaborations in actuarial or data science roles — email is best.
+            You can also reach me on LinkedIn or explore my code on GitHub.
+          </p>
           <div class="cta" style="margin-top:10px">
-            <a class="btn primary" id="btnEmail" target="_blank" rel="noopener noreferrer">Email me</a>
-            <a class="btn" id="btnGitHub" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a class="btn" id="btnPhone" target="_blank" rel="noopener noreferrer">Call</a>
+            <a class="btn primary" id="btnEmail" href="mailto:vinaaysai@gmail.com?subject=Hello%20Vinay" target="_blank" rel="noopener noreferrer">✉️ vinaaysai@gmail.com</a>
+            <a class="btn" href="https://www.linkedin.com/in/vinay-sai-jagannath-j" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn" id="btnGitHub2" href="https://github.com/vinaaysai" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="btn" href="tel:+918977501150">📞 +91 89775 01150</a>
           </div>
         </div>
       </div>
 
       <footer>
-        <div>© <span id="year"></span> <span id="footerName">Vinay Sai Jagannath J</span></div>
-        <div class="mono" id="footerMeta">Built with HTML • CSS • JS</div>
+        <div>© <span id="year"></span> Vinay Sai Jagannath Jonna</div>
+        <div class="mono">Built with HTML · CSS · JS</div>
       </footer>
     </section>
   </main>
 
-  <div class="toast" id="toast">Copied</div>
+  <div class="toast" id="toast">Copied ✅</div>
 
   <script>
     // =========================
-    // EDIT THIS DATA ONLY ✅
+    // PROFILE DATA
     // =========================
     const PROFILE = {
-      name: "Vinay Sai Jagannath J",
-      headline: "Aspiring Actuary • Tech Enthusiast",
-      location: "Bengaluru, Karnataka, India",
-      openTo: "Internships • Entry-level • Actuarial / Analytics roles • Bengaluru",
-
-      email: "vinaaysai@gmail.com",
-      phone: "+91 8977501150",
-
-      resumeUrl: "resume.pdf", // keep in same folder
-      linkedInUrl: "https://www.linkedin.com/in/vinay-sai-jagannath-j",
-      githubUrl: "#",
-
-      heroSummary:
-        "Organized and motivated Actuarial Data Science student with strong time management and analytical skills. "
-        + "Comfortable working with data-driven software applications and automation tools. "
-        + "Demonstrates clear communication, structured problem-solving, and the ability to contribute reliably in collaborative environments.",
-
-      about:
-        "I am an organized and motivated Actuarial Data Science student with a strong foundation in analytics, software tools, and structured problem-solving.\n\n"
-        + "I am proficient in working with technical applications, data handling, and automation-based solutions. My academic and project experience "
-        + "has strengthened my ability to manage time effectively, communicate clearly, and work collaboratively in diverse settings.\n\n"
-        + "I am eager to contribute to organizational growth while continuously improving my professional and technical skill set, "
-        + "particularly in actuarial science, risk assessment, and data analytics.",
-
-      chips: [
-        "Actuarial Data Science",
-        "Risk & Insurance Analytics",
-        "Python • SQL • Qt5",
-        "Automation & Optimization"
-      ],
-
-      // NEW: fills empty hero space
-      highlights: [
-        { title: "Actuarial Focus", text: "Pricing • reserving basics • risk assessment • probability & statistics." },
-        { title: "Project Work", text: "Timetable optimization + Cyber risk pricing framework (slides live)." },
-        { title: "Tools", text: "Python • MySQL • Pandas • SQL • Excel • Qt5." }
-      ],
-
-      kpis: [
-        { value: "BS", label: "Actuarial Data Science" },
-        { value: "2028", label: "Expected Graduation" },
-        { value: "Open", label: "To Internships" },
-        { value: "3+", label: "Projects (growing)" }
-      ],
-
-      quickFacts: [
-        { title: "Contact", text: "Bengaluru • vinaaysai@gmail.com" },
-        {
-          title: "Top Skills",
-          text: "Python • MySQL • Pandas • Cyber Risk Insurance • Dynamic Pricing Models • Analytical Skills • Problem Solving • Artificial Intelligence • Communication"
-        },
-        { title: "Looking for", text: "Actuarial / Analytics internships + Data science internships + entry roles" },
-        { title: "Currently learning", text: "Actuarial math + data analytics + insurance applications of AI." }
-      ],
-
       experience: [
         {
-          role: "Student Lead [Maintenance team]",
+          role: "Student Lead — Hostel Maintenance Team",
           org: "Sri Sathya Sai Institute of Higher Learning",
           period: "May 2024 — Present [co-curricular]",
           bullets: [
-            "Pursuing BS Actuarial Data Science (SSSIHL), Puttaparthy campus.",
-            "Strengthening fundamentals in probability, statistics, and analytics.",
-            "Applying Python/SQL skills through academic and independent projects."
+            "Led maintenance coordination for student hostel facilities.",
+            "Managed scheduling, reporting, and team communication.",
+            "Developed organizational and leadership skills in a live operational environment."
           ],
-          tags: ["Actuarial", "Statistics", "Analytics"]
+          tags: ["Leadership", "Team Coordination", "Operations"]
+        },
+        {
+          role: "Student Member & Lead — Cooperative Stores",
+          org: "Sri Sathya Sai Higher Secondary School",
+          period: "2023–24 [co-curricular]",
+          bullets: [
+            "Managed inventory, billing, and store operations.",
+            "Led a small team of student volunteers.",
+            "Gained hands-on experience in retail management and accountability."
+          ],
+          tags: ["Inventory Management", "Team Lead", "Accountability"]
         }
       ],
 
       projects: [
         {
-          name: "Automatic Timetable Generator with Preferences",
-          desc:
-            "Designed and developed a system to automate school timetable creation. "
-            + "Generates conflict-free schedules by enforcing hard constraints "
-            + "(teacher availability, room/time clashes) while optimizing soft constraints "
-            + "such as teacher preferred time slots using heuristic/optimization-style logic.",
-          tags: ["Python", "SQL", "Qt5", "Scheduling", "Optimization"],
-          links: [
-            { label: "Code", url: "#" },
-            { label: "Demo", url: "#" }
-          ]
-        },
-        {
           name: "Cyber Risk Insurance — Data-Driven Risk Assessment & Dynamic Pricing Model",
+          year: "2025",
           desc:
-            "Built a conceptual, data-driven cyber insurance pricing framework focused on dynamic premium estimation. "
-            + "Structured key assumptions for revenue/premium computation and treated potential outliers to stabilize pricing. "
-            + "Positioned the model to support risk-based premium justification, proactive risk management, and improved claim forecasting—"
-            + "benefiting both insurers (competitive advantage, forecasting) and insured organizations (fair premiums, transparency).",
+            "Built a conceptual framework for dynamic cyber insurance pricing, focusing on premium estimation. "
+            + "Structured assumptions for revenue and premium computation, handled outliers for stability, "
+            + "and positioned the model for risk-based premium justification and proactive risk management.",
           tags: ["Cyber Risk", "Insurance Pricing", "Dynamic Pricing", "Risk Assessment", "Analytics"],
           links: [
             { label: "Slides", url: "https://docs.google.com/presentation/d/e/2PACX-1vR__jL9NY9JCYWoKJqsXMYTjK0NI2l7bEJv5HAgWbKpH6CU80UvfR0LgSCKYbNzRSDh4UziShEvFxRh/pub?start=true&loop=false&delayms=3000" }
           ]
         },
         {
-          name: "Mini Analytics Dashboard (Coming Soon)",
+          name: "Automatic Timetable Generator with Preferences",
+          year: "2023–24",
           desc:
-            "A simple analytics dashboard to summarize datasets, build quick charts, and generate recruiter-friendly insights. "
-            + "Planned: data upload, cleaning helpers, and summary reports.",
-          tags: ["Python", "Pandas", "Visualization"],
+            "Designed and developed a system to automate school timetable creation, generating conflict-free schedules by enforcing hard constraints "
+            + "(teacher availability, room/time clashes) and optimizing soft constraints (preferred time slots) using heuristic and optimization logic.",
+          tags: ["Python", "SQL", "Qt5", "Scheduling", "Optimization"],
           links: [
-            { label: "Coming soon", url: "#" }
+            { label: "Code", url: "#" }
+          ]
+        },
+        {
+          name: "Bhajan Planner Web App",
+          year: "2026",
+          desc:
+            "Built a web app to manage and search bhajans with filters and tracking features. "
+            + "Implemented offline storage using IndexedDB. "
+            + "Designed responsive UI with real-time search and suggestions. "
+            + "Developed admin features to add, edit, and manage records.",
+          tags: ["HTML", "CSS", "JavaScript", "IndexedDB", "Offline-First"],
+          links: [
+            { label: "Live App", url: "https://brnbhajangroupplanner.netlify.app" }
+          ]
+        },
+        {
+          name: "Predictive Maintenance — NASA CMAPSS (RUL Prediction)",
+          year: "2026",
+          desc:
+            "Built a pipeline to predict turbofan engine RUL using CMAPSS data. "
+            + "Developed models for regression and classification, worked with multivariate time-series across varying conditions, "
+            + "and handled multi-condition and multi-fault sets. "
+            + "Focused on feature creation, RMSE-based checks, and spotting issues like leakage and weak generalization.",
+          tags: ["Python", "PySpark", "Machine Learning", "Predictive Maintenance", "Time-Series"],
+          links: [
+            { label: "GitHub", url: "https://github.com/vinaaysai/CMAPSS-predictive-maintenance" }
           ]
         }
       ],
 
+      training: [
+        {
+          title: "CAS Summer Program",
+          org: "Casualty Actuarial Society",
+          desc: "Four-week actuarial training covering ratemaking, reserving, insurance analytics, and actuarial career pathways. Worked on a case study based on insurance."
+        },
+        {
+          title: "ACET",
+          org: "Institute of Actuaries of India",
+          desc: "Passed the Actuarial Common Entrance Test (ACET) — May 2024. Gateway credential for the Institute of Actuaries of India."
+        },
+        {
+          title: "Introduction to Python",
+          org: "DataCamp — February 2026",
+          desc: "Core Python programming for data analysis and automation."
+        },
+        {
+          title: "Introduction to SQL",
+          org: "DataCamp — February 2026",
+          desc: "Querying, filtering, joining, and aggregating relational data with SQL."
+        },
+        {
+          title: "Artificial Intelligence Fundamentals",
+          org: "IBM",
+          desc: "Foundations of AI concepts, machine learning pipeline, and real-world AI applications."
+        }
+      ],
+
       skills: [
-        { group: "Data & Actuarial", items: ["Data Analysis", "Statistical Modelling", "Cyber Risk Insurance", "Dynamic Pricing Models", "Risk Assessment"] },
-        { group: "Programming & Tools", items: ["Python", "SQL", "MySQL", "Pandas", "Database Management Systems (DBMS)", "Qt5"] },
-        { group: "Analytics & ML", items: ["Data Visualisation", "Machine Learning (Basics)"] },
-        { group: "Professional Skills", items: ["Communication", "Team Collaboration", "Analytical Thinking", "Problem Solving"] },
-        { group: "Organisational", items: ["Time Management", "Project Coordination", "Event Management", "Team Leadership"] }
+        { group: "Data & Actuarial", items: ["Data Analysis", "Statistical Modelling", "Risk Assessment", "Financial Mathematics", "Probability & Statistics", "Cyber Risk Insurance", "Dynamic Pricing Models"] },
+        { group: "Programming & Tools", items: ["Python", "R", "SQL", "PySpark", "NumPy", "Pandas", "scikit-learn", "Qt5", "HTML5", "Git", "Excel"] },
+        { group: "Analytics & Machine Learning", items: ["Machine Learning", "Predictive Analytics", "Data Visualisation", "Data Science", "Generative AI", "Prompt Engineering"] },
+        { group: "Full-Stack Development", items: ["HTML/CSS/JS", "IndexedDB", "Responsive UI", "Offline-First Apps"] },
+        { group: "Professional & Organisational", items: ["Communication", "Leadership", "Collaboration", "Problem Solving", "Project Coordination", "Time Management"] }
       ],
 
       education: [
         {
-          title: "Bachelor of Science (Actuarial Data Science)",
+          title: "Bachelor of Science — Actuarial Data Science",
           place: "Sri Sathya Sai Institute of Higher Learning",
-          period: "June 2024 — May 2028",
-          notes: "Puttaparthy, Andhra Pradesh, India."
+          period: "2024–2027 [Expected]",
+          notes: "CGPA: 8.1 / 10 · Areas: Probability & Statistics, Financial Mathematics, Introduction to Insurance Fundamentals, Machine Learning."
         },
         {
-          title: "11th & 12th Grade (Mathematics, Computer Science, Accountancy, Economics)",
+          title: "11th & 12th Grade",
           place: "Sri Sathya Sai Higher Secondary School",
-          period: "June 2022 — April 2024",
-          notes: ""
+          period: "2022–2024",
+          notes: "Mathematics, Computer Science, Accountancy, Economics."
         },
         {
-          title: "1st — 10th Grade",
+          title: "1st – 10th Grade",
           place: "Sri Sathya Sai Higher Secondary School",
-          period: "July 2012 — April 2022",
+          period: "2012–2022",
           notes: ""
         }
-      ],
-
-      certifications: [
-        "ACET — Institute of Actuaries of India (May 2024)",
-        "CAS Student Program — Casualty Actuarial Society",
-        "Introduction to Python — DataCamp (Feb 2026)",
-        "Introduction to SQL — DataCamp (Feb 2026)",
-        "Artificial Intelligence Fundamentals — IBM"
-      ],
-
-      contactText:
-        "For internships, entry-level opportunities, or collaborations in actuarial/data roles, email is best. "
-        + "You can also reach me on LinkedIn."
+      ]
     };
 
     // =========================
     // RENDER
     // =========================
-    const $ = (sel) => document.querySelector(sel);
-    function setText(sel, val){ const el = $(sel); if(el) el.textContent = val; }
-    function setHref(sel, val){ const el = $(sel); if(el) el.href = val; }
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    setText("#navName", PROFILE.name);
-    setText("#navRole", PROFILE.headline);
-    setText("#heroName", (PROFILE.name || "Vinay").split(" ")[0]);
-    setText("#heroHeadline", PROFILE.headline);
-    setText("#heroTop", `Open to: ${PROFILE.openTo} • ${PROFILE.location}`);
-    setText("#heroSummary", PROFILE.heroSummary);
-    setText("#pfName", PROFILE.name);
-    setText("#pfRole", "BS Actuarial Data Science • SSSIHL");
-    setText("#aboutText", PROFILE.about);
-    setText("#contactText", PROFILE.contactText);
-    setText("#footerName", PROFILE.name);
-    setText("#year", new Date().getFullYear());
-
-    setHref("#btnResume", PROFILE.resumeUrl || "#");
-    setHref("#btnLinkedIn", PROFILE.linkedInUrl || "#");
-    setHref("#btnGitHub", PROFILE.githubUrl || "#");
-
-    // hero chips
-    const chips = $("#heroChips");
-    if (chips){
-      chips.innerHTML = "";
-      (PROFILE.chips || []).forEach(t => {
-        const span = document.createElement("span");
-        span.className = "chip";
-        span.textContent = t;
-        chips.appendChild(span);
-      });
-    }
-
-    // NEW: hero highlights
-    const highlights = $("#highlights");
-    if (highlights){
-      highlights.innerHTML = "";
-      (PROFILE.highlights || []).forEach(h => {
-        const div = document.createElement("div");
-        div.className = "hitem";
-        div.innerHTML = `<strong>${h.title}</strong><span>${h.text}</span>`;
-        highlights.appendChild(div);
-      });
-    }
-
-    // KPIs
-    const kpis = $("#kpis");
-    if (kpis){
-      kpis.innerHTML = "";
-      (PROFILE.kpis || []).forEach(k => {
-        const div = document.createElement("div");
-        div.className = "kpi";
-        div.innerHTML = `<strong>${k.value}</strong><span>${k.label}</span>`;
-        kpis.appendChild(div);
-      });
-    }
-
-    // Quick facts
-    const qf = $("#quickFacts");
-    if (qf){
-      qf.innerHTML = "";
-      (PROFILE.quickFacts || []).forEach(f => {
-        const div = document.createElement("div");
-        div.className = "item";
-        div.innerHTML = `<h3>${f.title}</h3><div class="sub">${f.text}</div>`;
-        qf.appendChild(div);
-      });
-    }
-
-    // Experience cards
-    const expGrid = $("#expGrid");
-    if (expGrid){
-      expGrid.innerHTML = "";
-      (PROFILE.experience || []).forEach(x => {
-        const card = document.createElement("div");
-        card.className = "item";
-        const bullets = (x.bullets||[]).map(b => `<li>${b}</li>`).join("");
-        const tags = (x.tags||[]).map(t => `<span class="tag">${t}</span>`).join("");
-        card.innerHTML = `
-          <h3>${x.role} • <span style="color:var(--muted)">${x.org}</span></h3>
-          <div class="sub mono" style="margin-top:6px">${x.period}</div>
-          <div class="sub" style="margin-top:10px">
-            <ul style="margin:0; padding-left:18px; line-height:1.6; color:var(--muted)">${bullets}</ul>
-          </div>
-          <div class="tags">${tags}</div>
-        `;
-        expGrid.appendChild(card);
-      });
-    }
+    // Experience
+    const expGrid = document.getElementById("expGrid");
+    PROFILE.experience.forEach(x => {
+      const card = document.createElement("div");
+      card.className = "item";
+      const bullets = (x.bullets||[]).map(b => `<li>${b}</li>`).join("");
+      const tags = (x.tags||[]).map(t => `<span class="tag">${t}</span>`).join("");
+      card.innerHTML = `
+        <h3>${x.role} · <span style="color:var(--muted)">${x.org}</span></h3>
+        <div class="sub mono" style="margin-top:6px">${x.period}</div>
+        <div class="sub" style="margin-top:10px">
+          <ul style="margin:0; padding-left:18px; line-height:1.6; color:var(--muted)">${bullets}</ul>
+        </div>
+        <div class="tags">${tags}</div>
+      `;
+      expGrid.appendChild(card);
+    });
 
     // Projects
-    const projGrid = $("#projGrid");
-    if (projGrid){
-      projGrid.innerHTML = "";
-      (PROFILE.projects || []).forEach(p => {
-        const div = document.createElement("div");
-        div.className = "project";
-        const tags = (p.tags||[]).map(t => `<span class="tag">${t}</span>`).join("");
-        const links = (p.links||[]).map(l => {
-          const safe = l.url && l.url !== "#" ? l.url : "#";
-          return `<a class="mini" href="${safe}" target="_blank" rel="noopener noreferrer">${l.label}</a>`;
-        }).join("");
-        div.innerHTML = `
-          <h3>${p.name}</h3>
-          <p>${p.desc}</p>
-          <div class="tags">${tags}</div>
-          <div class="links">${links}</div>
-        `;
-        projGrid.appendChild(div);
-      });
-    }
+    const projGrid = document.getElementById("projGrid");
+    PROFILE.projects.forEach(p => {
+      const div = document.createElement("div");
+      div.className = "project";
+      const tags = (p.tags||[]).map(t => `<span class="tag">${t}</span>`).join("");
+      const links = (p.links||[]).map(l => {
+        const safe = l.url && l.url !== "#" ? l.url : null;
+        if (!safe) return `<span class="mini" style="opacity:.45">${l.label}</span>`;
+        return `<a class="mini" href="${safe}" target="_blank" rel="noopener noreferrer">${l.label} ↗</a>`;
+      }).join("");
+      div.innerHTML = `
+        <h3>${p.name} <span style="font-size:11px;color:var(--muted2);font-weight:400">${p.year}</span></h3>
+        <p>${p.desc}</p>
+        <div class="tags">${tags}</div>
+        <div class="links">${links}</div>
+      `;
+      projGrid.appendChild(div);
+    });
+
+    // Training
+    const trainingGrid = document.getElementById("trainingGrid");
+    PROFILE.training.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "t-item";
+      div.innerHTML = `
+        <h3>${t.title}</h3>
+        <div class="sub" style="color:rgba(6,182,212,.75);margin-top:3px;font-size:11px">${t.org}</div>
+        <div class="sub">${t.desc}</div>
+      `;
+      trainingGrid.appendChild(div);
+    });
 
     // Skills
-    const skillsGrid = $("#skillsGrid");
-    if (skillsGrid){
-      skillsGrid.innerHTML = "";
-      (PROFILE.skills || []).forEach(s => {
-        const div = document.createElement("div");
-        div.className = "item";
-        div.innerHTML = `
-          <h3>${s.group}</h3>
-          <div class="tags" style="margin-top:10px">
-            ${(s.items || []).map(i => `<span class="tag">${i}</span>`).join("")}
-          </div>
-        `;
-        skillsGrid.appendChild(div);
-      });
-    }
+    const skillsGrid = document.getElementById("skillsGrid");
+    PROFILE.skills.forEach(s => {
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = `
+        <h3>${s.group}</h3>
+        <div class="tags" style="margin-top:10px">
+          ${(s.items||[]).map(i => `<span class="tag">${i}</span>`).join("")}
+        </div>
+      `;
+      skillsGrid.appendChild(div);
+    });
 
     // Education
-    const eduGrid = $("#eduGrid");
-    if (eduGrid){
-      eduGrid.innerHTML = "";
-      (PROFILE.education || []).forEach(e => {
-        const div = document.createElement("div");
-        div.className = "item";
-        div.innerHTML = `
-          <h3>${e.title}</h3>
-          <div class="sub">${e.place} • <span class="mono">${e.period}</span></div>
-          ${e.notes ? `<div class="sub" style="margin-top:8px">${e.notes}</div>` : ``}
-        `;
-        eduGrid.appendChild(div);
-      });
-    }
+    const eduGrid = document.getElementById("eduGrid");
+    PROFILE.education.forEach(e => {
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = `
+        <h3>${e.title}</h3>
+        <div class="sub">${e.place} · <span class="mono">${e.period}</span></div>
+        ${e.notes ? `<div class="sub" style="margin-top:8px">${e.notes}</div>` : ""}
+      `;
+      eduGrid.appendChild(div);
+    });
 
-    // Certifications
-    const certTags = $("#certTags");
-    if (certTags){
-      certTags.innerHTML = "";
-      (PROFILE.certifications || []).forEach(c => {
-        const span = document.createElement("span");
-        span.className = "tag";
-        span.textContent = c;
-        certTags.appendChild(span);
-      });
-    }
-
-    // Contact buttons
-    const btnEmail = $("#btnEmail");
-    if (btnEmail){
-      const emailHref = `mailto:${PROFILE.email}?subject=Hello%20${encodeURIComponent(PROFILE.name)}`;
-      btnEmail.href = emailHref;
-      btnEmail.textContent = `Email: ${PROFILE.email}`;
-    }
-
-    const btnPhone = $("#btnPhone");
-    if (btnPhone){
-      btnPhone.href = `tel:${(PROFILE.phone || "").replace(/\s+/g,'')}`;
-      btnPhone.textContent = `Call: ${PROFILE.phone}`;
-    }
-
-    // Copy email
-    const toast = $("#toast");
-    const btnCopy = $("#btnCopy");
-    if (btnCopy && toast){
-      btnCopy.addEventListener("click", async () => {
-        try{ await navigator.clipboard.writeText(PROFILE.email); toast.textContent = "Email copied ✅"; }
-        catch(e){ toast.textContent = "Copy failed (browser blocked)"; }
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 1400);
-      });
-    }
-
-    // Nav + scrollspy
+    // Nav sections
     const sections = [
       { id:"home", label:"Home" },
       { id:"about", label:"About" },
-      { id:"experience", label:"CURRENT POSITION" },
+      { id:"experience", label:"Experience" },
       { id:"projects", label:"Projects" },
+      { id:"training", label:"Training" },
       { id:"skills", label:"Skills" },
-      { id:"languages", label:"Languages" },
       { id:"education", label:"Education" },
       { id:"contact", label:"Contact" },
     ];
-    const nav = $("#nav");
-    if (nav){
-      nav.innerHTML = "";
-      sections.forEach(s => {
-        const a = document.createElement("a");
-        a.className = "pill";
-        a.href = `#${s.id}`;
-        a.textContent = s.label;
-        nav.appendChild(a);
+    const nav = document.getElementById("nav");
+    sections.forEach(s => {
+      const a = document.createElement("a");
+      a.className = "pill";
+      a.href = `#${s.id}`;
+      a.textContent = s.label;
+      nav.appendChild(a);
+    });
+
+    // Smooth scroll
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+      const id = a.getAttribute("href").slice(1);
+      const el = document.getElementById(id);
+      if(el){ e.preventDefault(); el.scrollIntoView({behavior:"smooth", block:"start"}); }
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(ent => { if(ent.isIntersecting) ent.target.classList.add("visible"); });
+    }, { threshold: 0.10 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+    // Scrollspy
+    const spy = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!visible) return;
+      const id = visible.target.id;
+      [...nav.querySelectorAll(".pill")].forEach(p => {
+        p.classList.toggle("active", p.getAttribute("href") === `#${id}`);
       });
+    }, { rootMargin: "-30% 0px -60% 0px", threshold: [0.08, 0.15, 0.25] });
+    sections.forEach(s => { const el = document.getElementById(s.id); if(el) spy.observe(el); });
 
-      // Smooth scroll
-      document.addEventListener("click", (e) => {
-        const a = e.target.closest('a[href^="#"]');
-        if(!a) return;
-        const id = a.getAttribute("href").slice(1);
-        const el = document.getElementById(id);
-        if(el){
-          e.preventDefault();
-          el.scrollIntoView({behavior:"smooth", block:"start"});
-        }
-      });
-
-      // Reveal on scroll
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(ent => { if(ent.isIntersecting) ent.target.classList.add("visible"); });
-      }, { threshold: 0.15 });
-      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
-
-      // Scrollspy active pill
-      const spy = new IntersectionObserver((entries) => {
-        const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
-        if(!visible) return;
-        const id = visible.target.id;
-        [...nav.querySelectorAll(".pill")].forEach(p => {
-          p.classList.toggle("active", p.getAttribute("href") === `#${id}`);
-        });
-      }, { rootMargin: "-30% 0px -60% 0px", threshold: [0.08, 0.15, 0.25] });
-
-      sections.forEach(s => {
-        const el = document.getElementById(s.id);
-        if(el) spy.observe(el);
-      });
-    }
+    // Copy email
+    const toast = document.getElementById("toast");
+    document.getElementById("btnCopy").addEventListener("click", async () => {
+      try{ await navigator.clipboard.writeText("vinaaysai@gmail.com"); toast.textContent = "Email copied ✅"; }
+      catch(e){ toast.textContent = "Copy failed"; }
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1600);
+    });
 
     // Project glow follows mouse
     document.addEventListener("mousemove", (e) => {

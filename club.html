@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Club Name • Institute Name</title>
+  <meta name="description" content="A music-first club blog with Indian classical inspired visuals and animations." />
+  <style>
+    :root{
+      --bg:#fffaf3;
+      --paper:#ffffff;
+      --ink:#1b1b1f;
+      --muted:#6b6f76;
+      --line:#ece4d6;
+      --soft:#fff3e1;
+      --accent:#7c3aed;   /* purple */
+      --accent2:#d97706;  /* saffron */
+      --teal:#0f766e;     /* deep teal */
+      --shadow: 0 14px 40px rgba(20,20,30,.10);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background:
+        radial-gradient(900px 520px at 15% -10%, rgba(217,119,6,.18), transparent 60%),
+        radial-gradient(900px 520px at 85% 0%, rgba(124,58,237,.14), transparent 60%),
+        radial-gradient(900px 520px at 55% 110%, rgba(15,118,110,.12), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .container{width:min(1160px,92vw); margin:0 auto}
+    .skip{
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip:focus{left:16px; top:16px; width:auto; height:auto; background:#fff; padding:10px 12px; border:1px solid var(--line); border-radius:10px; z-index:9999}
+
+    /* Header: music-first */
+    header{
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter: blur(10px);
+      background: rgba(255,250,243,.72);
+      border-bottom: 1px solid rgba(236,228,214,.8);
+    }
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:10px 0;
+    }
+    .logos{
+      display:flex; align-items:center; gap:10px; min-width: 260px;
+    }
+    .logoBox{
+      width:44px; height:44px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(217,119,6,.16), rgba(124,58,237,.12));
+      border:1px solid rgba(236,228,214,.95);
+      display:grid; place-items:center;
+      overflow:hidden;
+      box-shadow: 0 10px 22px rgba(20,20,30,.06);
+    }
+    .logoBox img{width:100%; height:100%; object-fit:cover}
+    .brand{
+      display:flex; flex-direction:column; gap:2px; line-height:1.1;
+    }
+    .brand b{font-size:14px}
+    .brand span{font-size:12px; color:var(--muted)}
+    nav{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
+    .navlink{
+      text-decoration:none;
+      font-size:13px;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:.2s ease;
+    }
+    .navlink:hover{
+      color:var(--ink);
+      background: rgba(124,58,237,.07);
+      border-color: rgba(124,58,237,.18);
+    }
+    .actions{
+      display:flex; align-items:center; gap:10px; justify-content:flex-end; min-width:260px;
+    }
+    .btn{
+      border:1px solid rgba(236,228,214,.95);
+      background: var(--paper);
+      color: var(--ink);
+      padding:9px 12px;
+      border-radius: 999px;
+      font-size:13px;
+      text-decoration:none;
+      display:inline-flex; align-items:center; gap:8px;
+      box-shadow: 0 10px 22px rgba(20,20,30,.06);
+      transition:.2s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btnPrimary{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#fff;
+      border-color: transparent;
+      box-shadow: 0 16px 34px rgba(124,58,237,.18);
+    }
+    .hamburger{display:none}
+    .navPanel{display:none; padding: 0 0 12px;}
+    .navPanel a{display:inline-flex; margin: 6px 6px 0 0}
+    .navPanel.on{display:block}
+
+    /* Hero: music poster layout */
+    .hero{padding: 22px 0 8px}
+    .heroShell{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:14px;
+      align-items:stretch;
+      padding: 16px 0 22px;
+    }
+    .card{
+      background: rgba(255,255,255,.9);
+      border:1px solid rgba(236,228,214,.95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .heroLeft{padding:20px; position:relative; overflow:hidden}
+    .ribbon{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; color: var(--muted);
+      background: rgba(217,119,6,.10);
+      border:1px solid rgba(217,119,6,.20);
+      padding: 7px 10px;
+      border-radius: 999px;
+      margin-bottom:12px;
+    }
+    .ribbon .pulse{
+      width:9px; height:9px; border-radius:50%;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      box-shadow: 0 0 0 6px rgba(217,119,6,.12);
+    }
+    h1{margin:0; font-size:42px; letter-spacing:-.03em; line-height:1.06}
+    .sub{
+      margin: 10px 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.55;
+      max-width: 64ch;
+    }
+    .heroStats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin: 14px 0 12px;
+    }
+    .stat{
+      border:1px solid rgba(236,228,214,.95);
+      border-radius: 16px;
+      padding:10px 12px;
+      background: rgba(255,243,225,.55);
+    }
+    .stat b{display:block; font-size:14px}
+    .stat span{display:block; margin-top:2px; color:var(--muted); font-size:12px}
+    .heroActions{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+
+    /* Music notation line (animated) */
+    .staff{
+      position:absolute;
+      left:-20px; right:-20px; bottom:-16px;
+      height:120px;
+      opacity:.75;
+      pointer-events:none;
+    }
+    .staffLine{
+      stroke: rgba(27,27,31,.12);
+      stroke-width:2;
+    }
+    .noteDot{
+      filter: drop-shadow(0 8px 16px rgba(20,20,30,.10));
+      animation: glide 7.5s linear infinite;
+    }
+    @keyframes glide{
+      0%{transform: translateX(-80px) translateY(10px); opacity:0}
+      10%{opacity:1}
+      100%{transform: translateX(860px) translateY(-6px); opacity:0}
+    }
+
+    /* Hero right: tanpura + tabla canvas */
+    .heroRight{padding:16px; position:relative; overflow:hidden}
+    .stage{
+      border-radius: 16px;
+      border:1px solid rgba(236,228,214,.95);
+      background:
+        radial-gradient(520px 260px at 20% 15%, rgba(217,119,6,.18), transparent 65%),
+        radial-gradient(520px 260px at 80% 20%, rgba(124,58,237,.14), transparent 65%),
+        radial-gradient(520px 280px at 55% 90%, rgba(15,118,110,.12), transparent 65%),
+        rgba(255,255,255,.75);
+      height:100%;
+      min-height: 320px;
+      position:relative;
+      overflow:hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    .shine{
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.70), transparent 55%);
+      animation: drift 7s ease-in-out infinite;
+      mix-blend-mode: overlay;
+      opacity:.55;
+      pointer-events:none;
+    }
+    @keyframes drift{
+      0%,100%{transform: translate(-7%, -7%) rotate(0deg)}
+      50%{transform: translate(7%, 7%) rotate(8deg)}
+    }
+    .floatNote{
+      position:absolute;
+      bottom:-16px;
+      opacity:.6;
+      animation: floatUp linear infinite;
+      pointer-events:none;
+      filter: drop-shadow(0 10px 20px rgba(20,20,30,.12));
+    }
+    .floatNote svg{width:30px; height:30px}
+    @keyframes floatUp{
+      0%{transform: translateY(40px) translateX(0) scale(.96); opacity:0}
+      12%{opacity:.6}
+      100%{transform: translateY(-380px) translateX(-34px) scale(1.06); opacity:0}
+    }
+    .stageFooter{
+      position:absolute; left:14px; right:14px; bottom:14px;
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .stageCard{
+      border-radius: 16px;
+      border:1px solid rgba(236,228,214,.95);
+      background: rgba(255,255,255,.70);
+      backdrop-filter: blur(8px);
+      padding:12px;
+      position:relative;
+      overflow:hidden;
+      min-height: 140px;
+    }
+    .stageCard b{display:block; font-size:13px}
+    .stageCard span{display:block; margin-top:6px; font-size:12px; color:var(--muted); line-height:1.35}
+    .sil{
+      position:absolute; right:-10px; bottom:-18px; width:190px; opacity:.26;
+      transform: rotate(-6deg);
+    }
+
+    /* Sections */
+    section{padding: 16px 0}
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin: 10px 0 10px;
+    }
+    .sectionHead h2{margin:0; font-size:20px}
+    .sectionHead p{margin:0; color:var(--muted); font-size:13px; max-width:65ch}
+
+    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    .infoCard{padding:14px}
+    .infoCard b{display:block; font-size:14px}
+    .infoCard span{display:block; margin-top:6px; color:var(--muted); font-size:13px; line-height:1.45}
+
+    /* Blog */
+    .blogShell{padding:14px}
+    .filters{
+      display:flex; flex-wrap:wrap; gap:8px;
+      align-items:center; justify-content:space-between;
+      margin-bottom: 12px;
+    }
+    .search{
+      flex: 1;
+      display:flex; gap:8px; align-items:center;
+      background: rgba(255,243,225,.55);
+      border:1px solid rgba(236,228,214,.95);
+      border-radius: 999px;
+      padding: 9px 12px;
+      min-width: 220px;
+    }
+    .search input{
+      border:none; outline:none; background:transparent;
+      width:100%;
+      font-size:13px;
+    }
+    .chips{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{
+      border:1px solid rgba(236,228,214,.95);
+      background: var(--paper);
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .chip.active{
+      color: var(--ink);
+      border-color: rgba(124,58,237,.28);
+      background: rgba(124,58,237,.08);
+    }
+    .posts{display:grid; grid-template-columns: repeat(2, 1fr); gap:12px}
+    .post{
+      padding:14px;
+      border-radius: 16px;
+      border:1px solid rgba(236,228,214,.95);
+      background: rgba(255,255,255,.92);
+      transition:.2s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .post:hover{transform: translateY(-2px)}
+    .post .meta{display:flex; gap:10px; align-items:center; color:var(--muted); font-size:12px}
+    .badge{
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:11px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(236,228,214,.95);
+      background: rgba(27,27,31,.03);
+      color: var(--muted);
+    }
+    .post h3{margin:10px 0 6px; font-size:16px}
+    .post p{margin:0; color:var(--muted); font-size:13px; line-height:1.5}
+    .post .read{margin-top:10px; display:inline-flex; align-items:center; gap:8px; color:var(--accent); font-size:13px; text-decoration:none}
+    .postGlow{
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 20%, rgba(217,119,6,.18), transparent 62%);
+      opacity:.55; pointer-events:none;
+    }
+
+    /* Gallery */
+    .gallery{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    .shot{
+      border-radius: 16px;
+      border:1px solid rgba(236,228,214,.95);
+      background: rgba(255,255,255,.92);
+      overflow:hidden;
+      position:relative;
+      min-height: 160px;
+      box-shadow: 0 12px 26px rgba(20,20,30,.08);
+    }
+    .gradArt{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(220px 160px at 20% 30%, rgba(217,119,6,.22), transparent 60%),
+        radial-gradient(220px 160px at 80% 35%, rgba(124,58,237,.18), transparent 60%),
+        radial-gradient(260px 220px at 50% 85%, rgba(15,118,110,.16), transparent 60%);
+      animation: breathe 7.2s ease-in-out infinite;
+    }
+    @keyframes breathe{
+      0%,100%{transform: scale(1)}
+      50%{transform: scale(1.03)}
+    }
+    .cap{
+      position:absolute; left:12px; right:12px; bottom:12px;
+      padding:10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(236,228,214,.95);
+      backdrop-filter: blur(8px);
+    }
+    .cap b{display:block; font-size:13px}
+    .cap span{display:block; margin-top:4px; font-size:12px; color:var(--muted)}
+
+    /* Footer */
+    footer{padding: 22px 0 40px; color: var(--muted); font-size: 13px;}
+    .footGrid{display:grid; grid-template-columns: 1.2fr .8fr; gap: 14px; align-items:start}
+    .footCard{padding:14px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+
+    /* Reveal */
+    .reveal{opacity:0; transform: translateY(10px); transition: .6s ease}
+    .reveal.on{opacity:1; transform: translateY(0)}
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .floatNote, .shine, .noteDot{animation:none !important}
+      .reveal{opacity:1; transform:none}
+      .btn:hover,.post:hover{transform:none}
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .heroShell{grid-template-columns: 1fr}
+      .grid3{grid-template-columns: 1fr}
+      .posts{grid-template-columns: 1fr}
+      .gallery{grid-template-columns: 1fr}
+      nav{display:none}
+      .hamburger{display:inline-flex}
+      .logos,.actions{min-width:auto}
+      .heroStats{grid-template-columns: 1fr}
+      .stageFooter{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="container">
+      <div class="topbar">
+        <!-- Left: Institute logo + name -->
+        <div class="logos">
+          <div class="logoBox" title="Institute Logo">
+            <img src="assets/institute-logo.png" alt="Institute Logo"
+                 onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=&quot;font-size:12px;color:#6b6f76&quot;>INST</span>';">
+          </div>
+          <div class="brand">
+            <b>Institute Name</b>
+            <span>City, State</span>
+          </div>
+        </div>
+
+        <!-- Center nav -->
+        <nav aria-label="Primary">
+          <a class="navlink" href="#home">Home</a>
+          <a class="navlink" href="#about">About</a>
+          <a class="navlink" href="#blog">Blog</a>
+          <a class="navlink" href="#gallery">Gallery</a>
+          <a class="navlink" href="#team">Team</a>
+          <a class="navlink" href="#contact">Contact</a>
+        </nav>
+
+        <!-- Right: buttons + club logo -->
+        <div class="actions">
+          <button class="btn hamburger" id="hamburger" aria-expanded="false" aria-controls="navPanel">☰ Menu</button>
+          <a class="btn" href="#blog">🎧 Blog</a>
+          <a class="btn btnPrimary" href="#join">Join</a>
+
+          <div class="logoBox" title="Club Logo" style="width:44px;height:44px;">
+            <img src="assets/club-logo.png" alt="Club Logo"
+                 onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=&quot;font-size:12px;color:#6b6f76&quot;>CLUB</span>';">
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile nav -->
+      <div class="navPanel" id="navPanel" aria-label="Mobile navigation">
+        <a class="navlink" href="#home">Home</a>
+        <a class="navlink" href="#about">About</a>
+        <a class="navlink" href="#blog">Blog</a>
+        <a class="navlink" href="#gallery">Gallery</a>
+        <a class="navlink" href="#team">Team</a>
+        <a class="navlink" href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container heroShell">
+        <!-- Left: like a music poster -->
+        <div class="card heroLeft reveal">
+          <div class="ribbon"><span class="pulse"></span> Indian Classical Music Club • Blog + Events</div>
+
+          <h1>
+            <span style="background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent;">
+              Club Name
+            </span>
+            <br/>
+            Raga • Tala • Riyaaz
+          </h1>
+
+          <p class="sub">
+            A warm space for listening circles, practice prompts, instrument stories, and performance highlights —
+            designed like a music magazine and updated like a blog.
+          </p>
+
+          <div class="heroStats" aria-label="Quick stats">
+            <div class="stat"><b>Weekly</b><span>Practice circles</span></div>
+            <div class="stat"><b>Monthly</b><span>Workshops & jams</span></div>
+            <div class="stat"><b>Seasonal</b><span>Stage showcases</span></div>
+          </div>
+
+          <div class="heroActions">
+            <a class="btn btnPrimary" href="#blog">Read Blog</a>
+            <a class="btn" href="#gallery">Gallery</a>
+            <a class="btn" href="#join">Join</a>
+          </div>
+
+          <!-- Animated staff + moving notes -->
+          <svg class="staff" viewBox="0 0 900 140" fill="none" aria-hidden="true">
+            <path class="staffLine" d="M0 40H900"/>
+            <path class="staffLine" d="M0 58H900"/>
+            <path class="staffLine" d="M0 76H900"/>
+            <path class="staffLine" d="M0 94H900"/>
+            <path class="staffLine" d="M0 112H900"/>
+            <!-- note group 1 -->
+            <g class="noteDot" style="animation-delay:.2s">
+              <circle cx="0" cy="70" r="7" fill="rgba(124,58,237,.9)"/>
+              <rect x="6" y="32" width="3" height="42" rx="2" fill="rgba(124,58,237,.9)"/>
+            </g>
+            <!-- note group 2 -->
+            <g class="noteDot" style="animation-delay:1.6s">
+              <circle cx="-40" cy="92" r="7" fill="rgba(217,119,6,.9)"/>
+              <rect x="-34" y="52" width="3" height="44" rx="2" fill="rgba(217,119,6,.9)"/>
+            </g>
+            <!-- note group 3 -->
+            <g class="noteDot" style="animation-delay:3.0s">
+              <circle cx="-80" cy="56" r="7" fill="rgba(15,118,110,.9)"/>
+              <rect x="-74" y="20" width="3" height="40" rx="2" fill="rgba(15,118,110,.9)"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Right: stage visuals -->
+        <div class="card heroRight reveal">
+          <div class="stage" aria-label="Animated music stage visuals">
+            <div class="shine"></div>
+
+            <!-- floating notes -->
+            <div class="floatNote" style="left:16%; animation-duration: 8.6s; animation-delay: .3s;">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="rgba(124,58,237,.95)" stroke-width="1.6"/>
+                <path d="M11 14V5l10-2v9" stroke="rgba(124,58,237,.95)" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="floatNote" style="left:38%; animation-duration: 9.4s; animation-delay: 1.0s;">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M8.5 19a2.3 2.3 0 1 0 0-4.6 2.3 2.3 0 0 0 0 4.6Z" stroke="rgba(217,119,6,.95)" stroke-width="1.6"/>
+                <path d="M10.5 14.4V6.2l9-1.9v8.6" stroke="rgba(217,119,6,.95)" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="floatNote" style="left:64%; animation-duration: 7.9s; animation-delay: .6s;">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="rgba(15,118,110,.95)" stroke-width="1.6"/>
+                <path d="M11 14V5l10-2v9" stroke="rgba(15,118,110,.95)" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <div class="stageFooter">
+              <div class="stageCard">
+                <b>Tanpura / Drone Corner</b>
+                <span>Daily listening prompts and drone-based pitch practice ideas.</span>
+                <!-- Tanpura-ish silhouette -->
+                <svg class="sil" viewBox="0 0 280 220" fill="none" aria-hidden="true">
+                  <path d="M160 26c-26-20-66-6-74 26-6 22 6 44 26 54 28 14 62 0 72-28 7-20 0-40-24-52Z"
+                        stroke="rgba(124,58,237,1)" stroke-width="7" stroke-linecap="round"/>
+                  <path d="M94 110c52 30 96 68 132 114" stroke="rgba(217,119,6,1)" stroke-width="7" stroke-linecap="round"/>
+                  <path d="M78 124c56 30 104 74 142 124" stroke="rgba(15,118,110,1)" stroke-width="5" stroke-linecap="round"/>
+                  <path d="M112 142L64 202" stroke="rgba(27,27,31,1)" stroke-width="6" stroke-linecap="round"/>
+                </svg>
+              </div>
+
+              <div class="stageCard">
+                <b>Tala / Percussion Corner</b>
+                <span>Clap patterns, metronome drills, and short konnakol challenges.</span>
+                <!-- Tabla-ish silhouette -->
+                <svg class="sil" viewBox="0 0 280 220" fill="none" aria-hidden="true">
+                  <ellipse cx="110" cy="132" rx="62" ry="48" stroke="rgba(217,119,6,1)" stroke-width="7"/>
+                  <ellipse cx="110" cy="132" rx="24" ry="18" stroke="rgba(27,27,31,1)" stroke-width="6"/>
+                  <path d="M48 132c0 32 28 62 62 62s62-30 62-62" stroke="rgba(124,58,237,1)" stroke-width="5" stroke-linecap="round"/>
+                  <ellipse cx="212" cy="132" rx="48" ry="38" stroke="rgba(15,118,110,1)" stroke-width="7"/>
+                  <ellipse cx="212" cy="132" rx="18" ry="14" stroke="rgba(27,27,31,1)" stroke-width="6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>About</h2>
+            <p>Short, music-first sections—like a magazine sidebar.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card infoCard reveal">
+            <b>What we do</b>
+            <span>Listening circles, riyaaz prompts, instrument showcases, and campus performances.</span>
+          </div>
+          <div class="card infoCard reveal">
+            <b>What we post</b>
+            <span>Blog updates, rehearsal notes, workshop recaps, and highlight reels.</span>
+          </div>
+          <div class="card infoCard reveal">
+            <b>For everyone</b>
+            <span>Beginners welcome. If you can listen deeply, you already belong here.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Blog</h2>
+            <p>Stories, notes, and announcements — searchable like a real blog.</p>
+          </div>
+        </div>
+
+        <div class="card blogShell reveal">
+          <div class="filters">
+            <div class="search" role="search">
+              🔎 <input id="searchInput" type="search" placeholder="Search (raga, tala, workshop, concert)..." />
+            </div>
+            <div class="chips" aria-label="Post filters">
+              <button class="chip active" data-tag="all">All</button>
+              <button class="chip" data-tag="events">Events</button>
+              <button class="chip" data-tag="workshop">Workshops</button>
+              <button class="chip" data-tag="practice">Practice</button>
+              <button class="chip" data-tag="listening">Listening</button>
+            </div>
+          </div>
+
+          <div class="posts" id="posts"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Gallery</h2>
+            <p>Use these blocks for photos, posters, reels, and instrument shots.</p>
+          </div>
+        </div>
+
+        <div class="gallery">
+          <div class="shot reveal">
+            <div class="gradArt"></div>
+            <div class="cap">
+              <b>Workshops</b>
+              <span>Warmups, learning moments, and guided practice</span>
+            </div>
+          </div>
+          <div class="shot reveal">
+            <div class="gradArt"></div>
+            <div class="cap">
+              <b>Performances</b>
+              <span>Stage highlights and crowd moments</span>
+            </div>
+          </div>
+          <div class="shot reveal">
+            <div class="gradArt"></div>
+            <div class="cap">
+              <b>Instruments</b>
+              <span>Veena, sitar, violin, tabla and more</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Team</h2>
+            <p>Keep it minimal and friendly.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card infoCard reveal">
+            <b>Coordinator</b>
+            <span>Student Name • Year/Program<br/>Email: ________</span>
+          </div>
+          <div class="card infoCard reveal">
+            <b>Events Lead</b>
+            <span>Student Name • Year/Program<br/>Email: ________</span>
+          </div>
+          <div class="card infoCard reveal">
+            <b>Media Lead</b>
+            <span>Student Name • Year/Program<br/>Instagram: ________</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOIN -->
+    <section id="join">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Join</h2>
+            <p>Link the button to your form or invite.</p>
+          </div>
+        </div>
+
+        <div class="card blogShell reveal">
+          <div class="grid3">
+            <div class="infoCard" style="border-right:1px solid rgba(236,228,214,.95);">
+              <b>Start simple</b>
+              <span>Join as a listener first. Add rhythm and swaras steadily.</span>
+            </div>
+            <div class="infoCard" style="border-right:1px solid rgba(236,228,214,.95);">
+              <b>Weekly rhythm</b>
+              <span>Practice circle + one blog update every week.</span>
+            </div>
+            <div class="infoCard">
+              <b>Register</b>
+              <span style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">
+                <a class="btn btnPrimary" href="https://example.com" target="_blank" rel="noreferrer">Open Join Form</a>
+                <a class="btn" href="#contact">Contact</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Contact</h2>
+            <p>Official handles, kept simple.</p>
+          </div>
+        </div>
+
+        <div class="footGrid">
+          <div class="card footCard reveal">
+            <b>Club Contact</b>
+            <div class="small" style="margin-top:10px; color:var(--muted); line-height:1.55;">
+              Email: <span class="mono">club@institute.edu</span><br/>
+              Instagram: <span class="mono">@clubhandle</span><br/>
+              Venue: ________ (optional)
+            </div>
+          </div>
+          <div class="card footCard reveal">
+            <b>Quick Links</b>
+            <div class="small" style="margin-top:10px;">
+              <ul style="margin:0; padding-left:18px; color:var(--muted); line-height:1.55;">
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#join">Join</a></li>
+                <li><a href="#team">Team</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footGrid">
+        <div class="card footCard">
+          <b>Footer Note</b>
+          <div class="small" style="margin-top:10px; color:var(--muted); line-height:1.55;">
+            A music-first blog layout with Indian classical-inspired visuals and gentle animations.
+          </div>
+        </div>
+        <div class="card footCard">
+          <b>Logos</b>
+          <div class="small" style="margin-top:10px; color:var(--muted); line-height:1.55;">
+            Add: <span class="mono">assets/institute-logo.png</span> and <span class="mono">assets/club-logo.png</span>.
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; text-align:center; color:var(--muted);">
+        © <span id="year"></span> Club Name • Institute Name
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Demo posts (edit as needed)
+    const POSTS = [
+      { title:"Listening Prompt: Raga Yaman (what to notice)", date:"2026-02-22", tag:"listening",
+        summary:"A short guide: aroha/avaroha feel, vadi-samvadi hints, and the calm glide of phrases.",
+        link:"#"
+      },
+      { title:"Riyaaz Routine: 20 minutes for pitch + clarity", date:"2026-02-20", tag:"practice",
+        summary:"Drone + swaras + slow phrases + a simple tala cycle — designed for consistency.",
+        link:"#"
+      },
+      { title:"Workshop: Tala Basics + Konnakol Warmup", date:"2026-02-18", tag:"workshop",
+        summary:"Clap patterns, waves, and a fun konnakol drill to lock timing without stress.",
+        link:"#"
+      },
+      { title:"Upcoming: Campus Evening of Ragas", date:"2026-03-05", tag:"events",
+        summary:"Student performances, instrument showcase, and a friendly audience segment.",
+        link:"#"
+      }
+    ];
+
+    const postsEl = document.getElementById("posts");
+    const searchInput = document.getElementById("searchInput");
+    const chips = Array.from(document.querySelectorAll(".chip"));
+    const yearEl = document.getElementById("year");
+    yearEl.textContent = new Date().getFullYear();
+
+    function fmtDate(iso){
+      const d = new Date(iso + "T00:00:00");
+      return d.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"2-digit" });
+    }
+
+    let activeTag = "all";
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, s => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[s]));
+    }
+
+    function render(){
+      const q = (searchInput.value || "").trim().toLowerCase();
+      const filtered = POSTS
+        .filter(p => activeTag === "all" ? true : p.tag === activeTag)
+        .filter(p => !q ? true : (p.title + " " + p.summary + " " + p.tag).toLowerCase().includes(q))
+        .sort((a,b)=> (a.date < b.date ? 1 : -1));
+
+      postsEl.innerHTML = filtered.map(p => `
+        <article class="post" aria-label="Blog post">
+          <div class="postGlow"></div>
+          <div class="meta">
+            <span class="badge">${p.tag.toUpperCase()}</span>
+            <span>•</span>
+            <span>${fmtDate(p.date)}</span>
+          </div>
+          <h3>${escapeHtml(p.title)}</h3>
+          <p>${escapeHtml(p.summary)}</p>
+          <a class="read" href="${p.link}" aria-label="Read more">Read more →</a>
+        </article>
+      `).join("") || `<div style="color:#6b6f76; font-size:13px; padding:10px;">No posts match your search.</div>`;
+    }
+
+    chips.forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        chips.forEach(c=>c.classList.remove("active"));
+        btn.classList.add("active");
+        activeTag = btn.dataset.tag;
+        render();
+      });
+    });
+
+    searchInput.addEventListener("input", render);
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("on");
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+    // Mobile menu
+    const hamburger = document.getElementById("hamburger");
+    const navPanel = document.getElementById("navPanel");
+    if(hamburger){
+      hamburger.addEventListener("click", ()=>{
+        const on = navPanel.classList.toggle("on");
+        hamburger.setAttribute("aria-expanded", String(on));
+      });
+      navPanel.querySelectorAll("a").forEach(a => a.addEventListener("click", ()=>{
+        navPanel.classList.remove("on");
+        hamburger.setAttribute("aria-expanded","false");
+      }));
+    }
+
+    render();
+  </script>
+</body>
+</html>1
